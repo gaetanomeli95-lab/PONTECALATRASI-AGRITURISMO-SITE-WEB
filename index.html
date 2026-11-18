@@ -17,6 +17,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/logo-oro.webp">
 <link rel="preload" as="image" href="assets/portone-1280.webp" imagesrcset="assets/portone-768.webp 768w, assets/portone-1280.webp 1280w, assets/portone-1920.webp 1920w, assets/portone-2560.webp 2560w" imagesizes="100vw" fetchpriority="high">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":["LodgingBusiness","Restaurant"],"name":"Ponte Calatrasi Agriturismo","description":"Agriturismo in una masseria del XII secolo nella valle del Belice: ristorante con prodotti della fattoria, otto camere, eventi.","url":"https://pontecalatrasi-agriturismo.vercel.app/","telephone":"+39 333 123 3806","email":"info@agriturismopontecalatrasi.com","image":"https://pontecalatrasi-agriturismo.vercel.app/assets/og.jpg","servesCuisine":"Siciliana","address":{"@type":"PostalAddress","streetAddress":"SS 624 Palermo-Sciacca, uscita km 43+800","addressLocality":"Roccamena","addressRegion":"PA","addressCountry":"IT"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]}],"numberOfRooms":8}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,13 +116,13 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 
 /* animazione iniziale: il portone si apre */
 #intro{position:fixed;inset:0;z-index:100;pointer-events:auto;cursor:pointer}
-#intro .door{position:absolute;top:0;bottom:0;width:50.5%;background:#222A1B;overflow:hidden}
+#intro .door{position:absolute;top:0;bottom:0;width:50.5%;background:#222A1B;overflow:hidden;will-change:transform}
 #intro .door::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,rgba(0,0,0,0) 2px 46px)}
 #intro .dl{left:0;border-right:1px solid rgba(201,154,69,.7)}
 #intro .dr{right:0;border-left:1px solid rgba(201,154,69,.7)}
 #intro .mark{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;text-align:center;padding:0 24px}
-#intro .mark img{width:min(300px,64vw);height:auto;opacity:0;transform:translateY(14px) scale(.96);filter:drop-shadow(0 8px 30px rgba(0,0,0,.35))}
-#intro .rule{width:0;height:1px;background:#C99A45}
+#intro .mark img{width:min(300px,64vw);height:auto;opacity:0;transform:translateY(14px) scale(.96);will-change:transform,opacity}
+#intro .rule{width:180px;height:1px;background:#C99A45;transform:scaleX(0);will-change:transform}
 #intro .tag{margin:0;font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:#E9C783;opacity:0}
 #intro .skipi{position:absolute;bottom:26px;left:0;right:0;text-align:center;font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(233,199,131,.55);opacity:0}
 
@@ -207,7 +208,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .facts dd{margin:8px 0 0;font-size:14px;color:var(--soft);line-height:1.4}
 
 /* striscia che scorre */
-.band{overflow:hidden;padding:28px 0;background:#3E4A2A}
+.band{overflow:hidden;padding:28px 0;background:linear-gradient(180deg,rgba(62,74,42,0),#3E4A2A 38%)}
 .band .row{display:flex;gap:48px;padding-right:48px;white-space:nowrap;width:max-content;animation:marquee 32s linear infinite;will-change:transform;font-family:var(--font-display);font-size:clamp(34px,4.6vw,64px);font-style:italic;color:#E9C783}
 .band .row span{display:inline-flex;align-items:center;gap:48px}
 .band .row span::after{content:"";width:10px;height:10px;background:#F4ECDD;transform:rotate(45deg)}
@@ -248,6 +249,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 /* la terra: foto a tutta larghezza */
 .full{position:relative;height:120vh;overflow:hidden}
 .full > img{position:absolute;inset:-10% 0;width:100%;height:120%;object-fit:cover}
+.full{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 80%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 80%,transparent 100%)}
 .full::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,12,6,.84) 0%,rgba(14,12,6,.6) 40%,rgba(14,12,6,0) 72%)}
 .full .over{position:relative;z-index:2;height:100%;display:flex;align-items:center;color:#F7F1E6}
 .full .over .eyebrow{color:#E7C989}
@@ -295,7 +297,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 /* capodanno */
 .nye{position:relative;color:#F2EADB}
 .nye-hero{position:relative;height:130vh;overflow:hidden}
-.nye-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%}
+.nye-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 40%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%);mask-image:linear-gradient(180deg,transparent 0,#000 16%)}
 .nye-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,12,10,.86) 0%,rgba(7,12,10,.4) 46%,rgba(7,12,10,0) 70%),linear-gradient(0deg,var(--night),rgba(11,19,17,0) 30%)}
 .fw{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
 .nye-hero .over{position:absolute;inset:0;z-index:3;display:flex;align-items:center}
@@ -307,8 +309,18 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .cd div{flex:1;padding:12px 6px;border:1px solid rgba(231,201,137,.45);border-radius:4px;text-align:center;background:rgba(7,12,10,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .cd b{display:block;font-family:var(--font-display);font-weight:400;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
 .cd span{display:block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#CFC5B0}
-.nye-body{padding:40px 0 120px}
-.menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 48px;padding:40px 0;border-top:1px solid rgba(242,234,219,.18);border-bottom:1px solid rgba(242,234,219,.18)}
+.nye-body{position:relative;padding:70px 0 130px;background:radial-gradient(ellipse 60% 45% at 12% 8%,rgba(201,154,69,.20),rgba(201,154,69,0) 70%),radial-gradient(ellipse 55% 50% at 92% 55%,rgba(122,24,48,.38),rgba(122,24,48,0) 70%),radial-gradient(ellipse 70% 40% at 50% 100%,rgba(201,154,69,.14),rgba(201,154,69,0) 70%),#0D1512;overflow:hidden}
+.nye-body::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.55;background-image:radial-gradient(1.2px 1.2px at 24px 38px,#F6DFA8 50%,transparent 51%),radial-gradient(1px 1px at 132px 92px,#FFF3D6 50%,transparent 51%),radial-gradient(1.4px 1.4px at 190px 18px,#E9C783 50%,transparent 51%),radial-gradient(1px 1px at 76px 160px,#FFF3D6 50%,transparent 51%),radial-gradient(1.2px 1.2px at 214px 196px,#F6DFA8 50%,transparent 51%);background-size:240px 240px}
+.nye-body .wrap{position:relative}
+.menu-card{position:relative;background:#F6EEDD;color:#1F1C16;border-radius:18px;padding:clamp(30px,4.5vw,64px);box-shadow:0 40px 100px rgba(0,0,0,.5);outline:1px solid rgba(201,154,69,.7);outline-offset:-14px}
+.mc-kick{margin:0;text-align:center;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#8A6220}
+.mc-title{margin:10px 0 0;text-align:center;font-size:clamp(36px,4.4vw,58px);line-height:1.05;color:#1F1C16}
+.mc-title em{font-style:italic;color:#8A6220}
+.menu-card .menu{margin-top:30px;border-color:rgba(31,28,22,.16)}
+.menu-card .menu h3{color:#8A6220}
+.menu-card .menu li{color:#1F1C16}
+.menu-card .menu li small{color:#5A5343;font-family:var(--font-text);font-size:15.5px}
+.menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 48px;padding:34px 0 6px;border-top:1px solid rgba(242,234,219,.18)}
 .menu h3{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#D8AE5E;margin:0 0 10px}
 .menu ul{margin:0;padding:0;list-style:none;display:grid;gap:8px}
 .menu li{font-family:var(--font-display);font-size:19px;line-height:1.35}
@@ -407,7 +419,8 @@ footer p{margin:0}
   .dish,.k-intro,.k-end{width:100%}
   .events-grid .e1,.events-grid .e2{grid-column:1 / -1}
   .nye-hero::after{display:none}
-  .menu{grid-template-columns:minmax(0,1fr)}
+  .menu{grid-template-columns:minmax(0,1fr);gap:26px}
+  .menu-card{border-radius:14px;outline-offset:-9px}
   .ticks,form .row{grid-template-columns:minmax(0,1fr)}
   .info div{grid-template-columns:minmax(0,1fr);gap:4px}
   .price strong{font-size:48px}
@@ -446,14 +459,18 @@ footer p{margin:0}
   .k-intro{margin-bottom:26px}
   .dish{position:sticky;top:74px;background:#7E321D;padding:12px 0 20px;margin:0 0 7vh;transform-origin:50% 0}
   .dish .ph{aspect-ratio:1/1}
-  .dish::after{content:"";position:absolute;inset:0;background:#260b04;opacity:var(--dim,0);pointer-events:none}
+  .dish{will-change:transform}
   .k-end{position:relative;z-index:2;background:#7E321D;padding:24px 0 10px}
   .nye-hero{height:auto;display:flex;flex-direction:column}
-  .nye-hero img{position:relative;inset:auto;height:auto;aspect-ratio:4/3;object-position:86% 35%;-webkit-mask-image:linear-gradient(180deg,#000 68%,transparent);mask-image:linear-gradient(180deg,#000 68%,transparent)}
+  .nye-hero img{position:relative;inset:auto;height:auto;aspect-ratio:4/3;object-position:86% 35%;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 68%,transparent);mask-image:linear-gradient(180deg,transparent 0,#000 14%,#000 68%,transparent)}
   .nye-hero .over{position:relative;inset:auto;padding:0 0 36px;margin-top:-12px}
   .mn-num{font-size:min(56vw,46vh)}
 }
 @media (max-width:700px){
+  .farm li,.cd div,.gate-event{backdrop-filter:none;-webkit-backdrop-filter:none}
+  .farm li{background:rgba(14,17,9,.86)}
+  .gate-event{background:rgba(20,24,15,.94)}
+  .dish .dimmer{position:absolute;inset:0;background:#260b04;opacity:0;pointer-events:none;will-change:opacity}
   .farm{grid-template-columns:repeat(2,minmax(0,1fr))}
   .lead{font-size:19.5px}
   .gate .lead{font-size:17px}
@@ -569,7 +586,7 @@ footer p{margin:0}
   <div class="band" aria-hidden="true"><div class="row" id="band"><span>Ulivi</span><span>Vigna</span><span>Grano</span><span>Caseificio</span><span>Orto</span><span>Forno a legna</span><span>Ulivi</span><span>Vigna</span><span>Grano</span><span>Caseificio</span><span>Orto</span><span>Forno a legna</span></div></div>
 
   <!-- 3. la terra -->
-  <section class="full" id="terra" data-time="10:30" data-label="Mattina" data-bg="#2C3420" data-night>
+  <section class="full" id="terra" data-time="10:30" data-label="Mattina" data-bg="#3E4A2A" data-night>
     <img src="assets/campagna-1280.webp" srcset="assets/campagna-768.webp 768w, assets/campagna-1280.webp 1280w, assets/campagna-1920.webp 1920w, assets/campagna-2560.webp 2560w" sizes="100vw" loading="lazy" decoding="async" alt="La valle del Belice con la masseria tra vigne e ulivi, e le rocce del Monte Maranfusa" data-speed="12">
     <div class="over">
       <div class="wrap">
@@ -659,13 +676,17 @@ footer p{margin:0}
     </div>
     <div class="nye-body">
       <div class="wrap">
-        <div class="menu">
+        <div class="menu-card">
+          <p class="mc-kick">31 dicembre 2026 · Ponte Calatrasi</p>
+          <h3 class="mc-title">Il menu <em>della serata</em></h3>
+          <div class="menu">
           <div><h3>Il benvenuto</h3><ul><li>Prosecco e stuzzichini dello chef</li></ul></div>
           <div><h3>Antipasti</h3><ul><li>Terrina di patate<small>con stracotto di carne e salsa al marsala</small></li><li>Fagottino di crêpes<small>salsa mornay al parmigiano e funghi di bosco</small></li><li>Roast beef di vitello<small>salsa tonnata e cipolla rossa in agrodolce</small></li><li>Sformatino di melanzane<small>cuore filante di mozzarella e basilico</small></li><li>Montanarina<small>pere saltate, speck e noci</small></li></ul></div>
           <div><h3>A centro tavola</h3><ul><li>I formaggi del nostro caseificio</li><li>I fritti di stagione</li><li>Sfincionello palermitano<small>e bocconcino con porchetta, confettura vegetale e rucola</small></li></ul></div>
           <div><h3>I primi</h3><ul><li>Paccheri al pesto di pistacchio<small>fiammiferi di speck croccante e basilico</small></li><li>Ravioli di mozzarella di bufala<small>sugo d'arrosto, salsa al prezzemolo e limone, carciofi fritti</small></li></ul></div>
           <div><h3>Il secondo</h3><ul><li>Tournedos di filetto di bovino<small>crema di patate affumicata, demi-glace, scaccio di Sicilia e verdure invernali</small></li></ul></div>
           <div><h3>Dolci e mezzanotte</h3><ul><li>Piccola pasticceria artigianale<small>tiramisù, cassatelle, bignè alla crema</small></li><li>Dopo il brindisi<small>lenticchie augurali, pandoro e panettone</small></li></ul></div>
+        </div>
         </div>
         <ul class="party"><li class="dj">DJ set con Bruno</li><li>Gadget</li><li>Sorteggi</li><li>Fuochi d'artificio a mezzanotte</li></ul>
         <div class="price">
@@ -821,7 +842,7 @@ setChapter(sections[0]);
 if (hasGsap){
   sections.forEach(function(sec, i){
     var next = sections[i + 1];
-    ScrollTrigger.create({ trigger: sec, start: i === 0 ? 'top top' : 'top 50%', endTrigger: next || sec, end: next ? 'top 50%' : 'bottom top', refreshPriority: -1, onToggle: function(st){ if (st.isActive) setChapter(sec); } });
+    ScrollTrigger.create({ trigger: sec, start: i === 0 ? 'top top' : 'top 65%', endTrigger: next || sec, end: next ? 'top 65%' : 'bottom top', refreshPriority: -1, onToggle: function(st){ if (st.isActive) setChapter(sec); } });
   });
 } else {
   var pickChapter = function(){
@@ -921,7 +942,6 @@ if (hasGsap && !reduce){
     gsap.utils.toArray('.dish').forEach(function(d, i){
       gsap.fromTo(d.querySelector('img'), { xPercent: -7, scale: 1.2 }, { xPercent: 7, scale: 1.2, ease: 'none', scrollTrigger: { trigger: d, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true } });
       gsap.fromTo(d, { y: i % 2 ? 50 : -30, rotate: i % 2 ? 1.5 : -1.5 }, { y: i % 2 ? -30 : 50, rotate: 0, ease: 'none', scrollTrigger: { trigger: d, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true } });
-      gsap.from(d.querySelector('figcaption'), { y: 26, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: d, containerAnimation: slide, start: 'left 78%', toggleActions: 'play none none reverse' } });
     });
     gsap.fromTo('.nye-hero img', { scale: 1.06 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.nye-hero', start: 'top bottom', end: 'bottom top', scrub: true } });
   });
@@ -938,7 +958,10 @@ if (hasGsap && !reduce){
       gsap.from(d.querySelector('img'), { scale: 1.15, duration: 1.4, ease: 'power2.out', scrollTrigger: { trigger: d, start: 'top 90%', once: true } });
       gsap.from(d.querySelector('figcaption'), { y: 24, opacity: 0, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: d, start: 'top 75%', once: true } });
       var next = dishes[i + 1] || document.querySelector('.k-end');
-      gsap.to(d, { scale: 0.9, '--dim': 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 80px', scrub: true } });
+      var dim = d.querySelector('.dimmer') || d.appendChild(Object.assign(document.createElement('span'), { className: 'dimmer' }));
+      var stc = { trigger: next, start: 'top bottom', end: 'top 80px', scrub: true };
+      gsap.to(d, { scale: 0.9, ease: 'none', scrollTrigger: stc });
+      gsap.to(dim, { opacity: 0.55, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top 80px', scrub: true } });
     });
   });
 }
@@ -975,7 +998,7 @@ if (hasGsap && !reduce){
   size(); addEventListener('resize', size);
   var n = innerWidth < 700 ? 26 : 60;
   for (var i = 0; i < n; i++) ps.push({ x: Math.random(), y: Math.random(), r: 0.6 + Math.random() * 1.8, s: 0.004 + Math.random() * 0.012, o: Math.random() * 6.28 });
-  new IntersectionObserver(function(es){ on = es[0].isIntersecting; if (on) requestAnimationFrame(f); }).observe(c);
+  new IntersectionObserver(function(es){ var was = on; on = es[0].isIntersecting; if (on && !was && !window.__introRunning) requestAnimationFrame(f); }).observe(c);
   function f(t){
     x.clearRect(0, 0, W, H);
     for (var i = 0; i < ps.length; i++){
@@ -985,7 +1008,8 @@ if (hasGsap && !reduce){
     }
     if (on) requestAnimationFrame(f);
   }
-  requestAnimationFrame(f);
+  if (document.getElementById('intro') && !reduce) addEventListener('pc-intro-done', function(){ requestAnimationFrame(f); }, { once: true });
+  else requestAnimationFrame(f);
 })();
 
 /* ---------- animazione iniziale ---------- */
@@ -1001,9 +1025,9 @@ if (hasGsap && !reduce){
   $('#dock').classList.add('hidden');
   gsap.set(heroBits, { y: 30, opacity: 0 });
   gsap.set('#wall', { scale: 1.35, transformOrigin: function(){ return arch.cx + 'px ' + arch.cy + 'px'; } });
-  var tl = gsap.timeline({ onComplete: done });
+  var tl = gsap.timeline({ paused: true, onComplete: done });
   tl.to('#intro .mark img', { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: 'power3.out' }, 0.15)
-    .to('#intro .rule', { width: 180, duration: 0.9, ease: 'power2.inOut' }, 0.55)
+    .to('#intro .rule', { scaleX: 1, duration: 0.9, ease: 'power2.inOut' }, 0.55)
     .to('#intro .tag', { opacity: 1, duration: 0.7 }, 0.9)
     .to('#intro .skipi', { opacity: 1, duration: 0.6 }, 1.2)
     .to('#intro .mark, #intro .skipi', { opacity: 0, y: -16, duration: 0.5, ease: 'power2.in' }, 2.05)
@@ -1012,14 +1036,23 @@ if (hasGsap && !reduce){
     .to('#wall', { scale: 1, duration: 1.6, ease: 'expo.out' }, 2.75)
     .to(heroBits, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.09 }, 3.05);
   function done(){
+    window.__introRunning = false;
     intro.remove();
     gsap.set('#wall', { clearProps: 'scale' });
     document.documentElement.style.overflow = '';
     $('#dock').classList.remove('hidden');
     if (lenis) lenis.start();
-    ScrollTrigger.refresh();
+    setTimeout(function(){ ScrollTrigger.refresh(); dispatchEvent(new Event('pc-intro-done')); }, 250);
   }
   intro.addEventListener('click', function(){ tl.progress(1); });
+  var started = false;
+  function go(){ if (started) return; started = true; requestAnimationFrame(function(){ requestAnimationFrame(function(){ tl.play(0); }); }); }
+  var logo = intro.querySelector('img');
+  var idle = function(cb){ (window.requestIdleCallback || function(f){ setTimeout(f, 120); })(cb, { timeout: 700 }); };
+  var ready = function(){ (logo.decode ? logo.decode().catch(function(){}) : Promise.resolve()).then(function(){ idle(go); }); };
+  if (document.readyState === 'complete') ready(); else addEventListener('load', ready);
+  setTimeout(go, 2500);
+  window.__introRunning = true;
 })();
 
 /* ---------- fuochi d'artificio su canvas ---------- */
@@ -1164,7 +1197,7 @@ $('#copy').addEventListener('click', function(){
   navigator.clipboard.writeText($('#msg').textContent).then(function(){ b.textContent = 'Copiato'; }, function(){ b.textContent = 'Seleziona e copia il testo sopra'; });
 });
 
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (hasGsap) ScrollTrigger.refresh(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (!hasGsap) return; if (window.__introRunning) addEventListener('pc-intro-done', function(){ ScrollTrigger.refresh(); }, { once: true }); else ScrollTrigger.refresh(); });
 })();
 </script>
 </body>
