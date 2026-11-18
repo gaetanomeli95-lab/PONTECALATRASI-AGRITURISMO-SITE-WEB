@@ -89,7 +89,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .menu-toggle{display:none;background:none;border:1px solid currentColor;color:var(--fg);border-radius:999px;min-height:44px;padding:0 16px;font:600 14px var(--font-body);letter-spacing:.08em;text-transform:uppercase}
 
 /* 1. il portone */
-.gate{position:relative;height:100vh;min-height:620px;overflow:hidden;background:#27301F}
+.gate{position:relative;height:100vh;min-height:620px;overflow:hidden;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='44'%3E%3Cpath d='M0 .5H120M0 22.5H120M.5 0V22M60.5 22V44' fill='none' stroke='rgba(233,199,131,.07)'/%3E%3C/svg%3E"),radial-gradient(ellipse 80% 75% at 62% 45%,#34402A,#1F2718)}
 .gate-photo{position:absolute;inset:0}
 .gate-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform-origin:50% 50%}
 .gate-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,11,7,.72),rgba(15,11,7,0) 55%)}
@@ -139,7 +139,9 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .d-tel{background:#C99A45;color:#1C150A}
 .d-mail{background:#F4ECDD;color:#27301F;border:1px solid rgba(39,48,31,.18)}
 .dock.hidden,body.menu-open .dock{opacity:0;transform:translateY(20px);pointer-events:none}
-.gate-wall,#gateImg{will-change:transform}
+.gate-photo{will-change:clip-path}
+#gateImg{will-change:transform}
+.gate-wall{will-change:opacity}
 
 
 .gate-facts{display:flex;gap:0;margin:34px 0 0;padding:0;list-style:none;border-top:1px solid rgba(233,199,131,.25)}
@@ -157,7 +159,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate-side{position:absolute;right:clamp(14px,2vw,26px);top:50%;margin:0;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:12px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:rgba(233,199,131,.6)}
 @media (max-width:700px){
   .gate-facts,.gate-side{display:none}
-  .gate-event{left:0!important;right:0;margin:0 auto;width:max-content;padding:8px 14px 8px 8px;gap:10px}
+  .gate-event{position:relative;left:auto!important;top:auto!important;width:max-content;max-width:100%;margin:0 0 16px;padding:7px 14px 7px 7px;gap:10px;box-shadow:none}
   .gate-event:hover{transform:none}
   .ge-date{width:44px;height:46px}.ge-date b{font-size:22px}
   .ge-txt{font-size:16px}.ge-txt em{display:none}
@@ -196,6 +198,36 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 #masseria{z-index:2;background:#F4EDE1;margin-top:-4px}
 #masseria::before{content:"";position:absolute;left:0;right:0;top:-60px;height:62px;background:linear-gradient(180deg,rgba(244,237,225,0),#F4EDE1);pointer-events:none}
 
+
+/* sezioni con due foto: testo e foto fermi, la seconda foto sale come un sipario */
+.feature{padding:0}
+.feature-grid{display:grid;grid-template-columns:minmax(0,1fr) 50vw;min-height:210vh}
+.feature.rev .feature-grid{grid-template-columns:50vw minmax(0,1fr)}
+.feature.rev .text{order:2}
+.feature .text{position:sticky;top:0;align-self:start;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:110px clamp(28px,5vw,96px) 70px clamp(20px,7vw,120px)}
+.feature.rev .text{padding:110px clamp(20px,7vw,120px) 70px clamp(28px,5vw,96px)}
+.media{position:sticky;top:0;align-self:start;height:100vh;overflow:hidden;background:#1F2718}
+.media figure{position:absolute;inset:0;margin:0;overflow:hidden}
+.media .m1{z-index:1}.media .m2{z-index:2}
+.media img{width:100%;height:100%;object-fit:cover}
+.media .m1 img{transform-origin:50% 60%}
+.media .m2{transform:translateY(100%);will-change:transform}
+.m2-in{position:absolute;inset:0;transform:translateY(-100%);will-change:transform}
+.media figcaption{position:absolute;left:clamp(16px,2vw,28px);bottom:clamp(16px,2.4vw,30px);display:flex;align-items:center;gap:10px;padding:9px 16px;border-radius:999px;background:rgba(20,14,8,.74);color:#F7F1E6;font-size:14px;font-weight:600;z-index:2}
+.media figcaption b{font-family:var(--font-display);font-weight:500;color:#E9C783}
+@media (max-width:900px){
+  .feature-grid,.feature.rev .feature-grid{display:block;min-height:0}
+  .feature .text,.feature.rev .text{position:static;min-height:0;padding:clamp(100px,14vh,140px) clamp(20px,5vw,40px) 34px}
+  .media{position:relative;height:auto;display:grid;gap:8px;background:none}
+  .media figure,.m2-in{position:relative;inset:auto;transform:none}
+  .media .m1{aspect-ratio:4/5}
+  .feature.rev .media .m1{aspect-ratio:4/3}
+  .media .m2{transform:none;aspect-ratio:4/3}
+  .feature.rev .media .m2{aspect-ratio:4/5}
+  .m2-in{height:100%}
+  .feature{padding-bottom:30px}
+}
+
 /* capitoli */
 .chapter{position:relative;padding:clamp(110px,16vh,180px) 0}
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,6vw,96px);align-items:center}
@@ -206,8 +238,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .stack figure img{width:100%;height:100%;object-fit:cover}
 .stack .a{left:0;top:0;width:62%;height:88%}
 .stack .b{right:0;bottom:0;width:60%;height:46%;border:8px solid var(--bg);transition:border-color 1.2s}
-.reveal-img{will-change:transform}
-.reveal-img img{will-change:transform}
+
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:40px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}
 .facts dt{font-family:var(--font-display);font-size:48px;line-height:1;font-variant-numeric:tabular-nums}
 .facts dd{margin:8px 0 0;font-size:14px;color:var(--soft);line-height:1.4}
@@ -428,14 +459,23 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .mn-top{transition:opacity .4s}
 
 /* contatti */
-.contact{padding:clamp(110px,14vh,160px) 0 80px}
+.contact{padding:clamp(110px,14vh,160px) 0 90px;background:radial-gradient(ellipse 55% 50% at 85% 25%,rgba(201,154,69,.18),rgba(201,154,69,0) 70%),radial-gradient(ellipse 50% 45% at 10% 90%,rgba(122,24,48,.22),rgba(122,24,48,0) 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='44'%3E%3Cpath d='M0 .5H120M0 22.5H120M.5 0V22M60.5 22V44' fill='none' stroke='rgba(233,199,131,.07)'/%3E%3C/svg%3E")}
 .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,90px)}
 .info{margin:34px 0 0;display:grid;gap:0}
 .info div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:16px;padding:18px 0;border-top:1px solid var(--line)}
 .info dt{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);padding-top:4px}
 .info dd{margin:0;font-size:17px}
 .info a{text-decoration-color:var(--gold);text-underline-offset:4px}
-form{display:grid;gap:16px;padding:clamp(22px,3vw,34px);border-radius:6px;border:1px solid var(--line);background:rgba(242,234,219,.04)}
+form{display:grid;gap:16px;padding:clamp(24px,3.4vw,40px);border-radius:18px;background:#F6EEDD;color:#1F1C16;box-shadow:0 34px 90px rgba(0,0,0,.4);outline:1px solid rgba(201,154,69,.7);outline-offset:-10px}
+form h3{color:#1F1C16}
+form label,form .chips legend{color:#8A6220}
+form input,form select,form textarea{color:#1F1C16;background:#FFFCF5;border:1px solid rgba(31,28,22,.2)}
+form input:focus,form select:focus,form textarea:focus{border-color:#C99A45;outline:2px solid rgba(201,154,69,.35);outline-offset:0}
+form .chips label{color:#1F1C16;border-color:rgba(31,28,22,.22);background:#FFFCF5}
+form .chips label:has(input:checked){border-color:#C99A45;background:#F2DFB2}
+form .out{border-color:rgba(31,28,22,.18);background:#FFFCF5}
+form .out .btn-line{color:#1F1C16}
+form .small{color:#5A5343}
 form h3{font-size:34px;line-height:1.1}
 form .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
@@ -452,7 +492,7 @@ select option{color:#1F1C16}
 .out pre{margin:0;white-space:pre-wrap;font:500 15px/1.5 var(--font-body)}
 .out .acts{display:flex;flex-wrap:wrap;gap:10px}
 .small{font-size:13px;color:var(--soft);margin:0}
-footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--soft);font-size:14px}
+footer{padding:40px 0 60px;background:#1B2215;border-top:1px solid rgba(201,154,69,.45);color:#CFC7B2;font-size:14px}
 footer .wrap{display:flex;flex-wrap:wrap;gap:16px 40px;justify-content:space-between;align-items:center}
 footer img{width:150px;height:auto}
 footer p{margin:0}
@@ -548,6 +588,10 @@ footer p{margin:0}
   .gate-event{background:rgba(20,24,15,.94)}
   .dish .dimmer{position:absolute;inset:0;background:#260b04;opacity:0;pointer-events:none;will-change:opacity}
   .farm{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:700px) and (max-height:720px){
+  .gate .lead{display:none}
+  .gate h1{font-size:46px}
   .lead{font-size:19.5px}
   .gate .lead{font-size:17px}
   .gate-welcome{bottom:20vh}
@@ -610,7 +654,7 @@ footer p{margin:0}
   <!-- 1. si entra dal portone -->
   <section class="gate" id="portone" data-time="06:30" data-label="Alba" data-bg="#27301F" data-night>
     <div class="gate-photo"><img id="gateImg" src="assets/portone-1280.webp" srcset="assets/portone-768.webp 768w, assets/portone-1280.webp 1280w, assets/portone-1920.webp 1920w, assets/portone-2560.webp 2560w" sizes="100vw" fetchpriority="high" decoding="async" alt="Il portone ad arco della masseria tra due palme, con il baglio sullo sfondo"></div>
-    <svg class="gate-wall" id="wall" aria-hidden="true" preserveAspectRatio="none"><defs><pattern id="conci" width="120" height="44" patternUnits="userSpaceOnUse"><path d="M0 .5H120M0 22.5H120M.5 0V22M60.5 22V44M30.5 0V0" fill="none" stroke="rgba(233,199,131,.07)" stroke-width="1"/></pattern><radialGradient id="luce" cx="62%" cy="45%" r="70%"><stop offset="0" stop-color="#34402A"/><stop offset="1" stop-color="#1F2718"/></radialGradient></defs><path id="wallPath" fill-rule="evenodd" fill="url(#luce)"></path><path id="wallTex" fill-rule="evenodd" fill="url(#conci)"></path><path id="wallEdge" class="edge"></path><path id="wallEdge2" class="edge2"></path></svg>
+    <svg class="gate-wall" id="wall" aria-hidden="true" preserveAspectRatio="none"><path id="wallEdge" class="edge"></path><path id="wallEdge2" class="edge2"></path></svg>
     <canvas class="dust" id="dust" aria-hidden="true"></canvas>
     <div class="gate-intro">
       <div class="txt">
@@ -639,8 +683,8 @@ footer p{margin:0}
   </section>
 
   <!-- 2. la masseria -->
-  <section class="chapter" id="masseria" data-time="08:30" data-label="Mattino" data-bg="#F4EDE1">
-    <div class="wrap split">
+  <section class="chapter feature" id="masseria" data-time="08:30" data-label="Mattino" data-bg="#F4EDE1">
+    <div class="feature-grid">
       <div class="text">
         <p class="eyebrow"><b>08:30</b> La masseria</p>
         <h2 class="split-line">Nove secoli <em>di pietra</em></h2>
@@ -652,9 +696,9 @@ footer p{margin:0}
           <div><dt>150</dt><dd>coperti tra sale e baglio</dd></div>
         </dl>
       </div>
-      <div class="stack">
-        <figure class="a reveal-img" data-speed="-6"><img src="assets/baglio-1080.webp" srcset="assets/baglio-640.webp 640w, assets/baglio-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 36vw" loading="lazy" decoding="async" alt="Il baglio in pietra con l'ulivo secolare al centro"></figure>
-        <figure class="b reveal-img" data-speed="10"><img src="assets/portone-1280.webp" srcset="assets/portone-768.webp 768w, assets/portone-1280.webp 1280w, assets/portone-1920.webp 1920w, assets/portone-2560.webp 2560w" sizes="(max-width: 700px) 92vw, 36vw" loading="lazy" decoding="async" alt="Il portone ad arco della masseria" style="object-position:50% 45%"></figure>
+      <div class="media" aria-label="Foto della masseria">
+        <figure class="m1"><img src="assets/baglio-1080.webp" srcset="assets/baglio-640.webp 640w, assets/baglio-1080.webp 1080w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" alt="Il baglio in pietra con l'ulivo secolare al centro"><figcaption><b>01</b> Il baglio con l'ulivo</figcaption></figure>
+        <figure class="m2"><div class="m2-in"><img src="assets/portone-1280.webp" srcset="assets/portone-768.webp 768w, assets/portone-1280.webp 1280w, assets/portone-1920.webp 1920w, assets/portone-2560.webp 2560w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" alt="Il portone ad arco della masseria"><figcaption><b>02</b> Il portone d'ingresso</figcaption></div></figure>
       </div>
     </div>
   </section>
@@ -697,8 +741,8 @@ footer p{margin:0}
   </section>
 
   <!-- 5. camere -->
-  <section class="chapter" id="camere" data-time="16:00" data-label="Pomeriggio" data-bg="#E1E7D4">
-    <div class="wrap split rev">
+  <section class="chapter feature rev" id="camere" data-time="16:00" data-label="Pomeriggio" data-bg="#E1E7D4">
+    <div class="feature-grid">
       <div class="text">
         <p class="eyebrow"><b>16:00</b> Le camere</p>
         <h2 class="split-line">Restare <em>a dormire</em></h2>
@@ -708,9 +752,9 @@ footer p{margin:0}
         </ul>
         <p class="note">D'estate c'è anche la piscina panoramica, in mezzo al verde.</p>
       </div>
-      <div class="stack stack-rooms">
-        <figure class="a reveal-img" data-speed="-4"><img src="assets/camera-1080.webp" srcset="assets/camera-640.webp 640w, assets/camera-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 46vw" loading="lazy" decoding="async" alt="Una camera matrimoniale con il soffitto in legno a vista"></figure>
-        <figure class="b reveal-img" data-speed="10"><img src="assets/casa-1080.webp" srcset="assets/casa-640.webp 640w, assets/casa-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 36vw" loading="lazy" decoding="async" alt="L'ingresso delle camere con le scale, la palma e la vista sulla valle"></figure>
+      <div class="media" aria-label="Foto delle camere">
+        <figure class="m1"><img src="assets/camera-1080.webp" srcset="assets/camera-640.webp 640w, assets/camera-1080.webp 1080w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" alt="Una camera matrimoniale con il soffitto in legno a vista"><figcaption><b>01</b> Una camera matrimoniale</figcaption></figure>
+        <figure class="m2"><div class="m2-in"><img src="assets/casa-1080.webp" srcset="assets/casa-640.webp 640w, assets/casa-1080.webp 1080w" sizes="(max-width: 900px) 100vw, 50vw" loading="lazy" decoding="async" alt="L'ingresso delle camere con le scale, la palma e la vista sulla valle"><figcaption><b>02</b> L'ingresso delle camere, con vista sulla valle</figcaption></div></figure>
       </div>
     </div>
   </section>
@@ -822,7 +866,7 @@ footer p{margin:0}
   </section>
 
   <!-- 9. contatti -->
-  <section class="contact" id="contatti" data-time="00:30" data-label="Buon anno" data-bg="#0F1916" data-night>
+  <section class="contact" id="contatti" data-time="00:30" data-label="Buon anno" data-bg="#27301F" data-night>
     <div class="wrap contact-grid">
       <div>
         <p class="eyebrow"><b>Contatti</b></p>
@@ -959,33 +1003,45 @@ if (hasGsap){
 }
 
 /* ---------- il portone ad arco ---------- */
-var wall = $('#wall'), wallPath = $('#wallPath'), wallEdge = $('#wallEdge');
-var arch = { cx: 0, cy: 0, w: 0, h: 0 };
+var wall = $('#wall'), wallEdge = $('#wallEdge'), gatePhoto = document.querySelector('.gate-photo');
+var arch = { cx: 0, cy: 0, w: 0, h: 0 }, gateDone = false;
 function drawWall(){
   var W = innerWidth, H = wall.parentNode.offsetHeight, mobile = W < 700;
-  var aw = mobile ? Math.min(W * 0.56, 250) : Math.min(W * 0.3, 500), ah = mobile ? Math.min(H * 0.38, aw * 1.5) : Math.min(H * 0.72, aw * 1.6);
+  var ev = document.getElementById('gateEvent'), txt = document.querySelector('.gate-intro .txt'), gi0 = document.querySelector('.gate-intro');
+  if (ev){ if (mobile && ev.parentNode !== txt) txt.insertBefore(ev, txt.firstChild); if (!mobile && ev.parentNode === txt) gi0.insertBefore(ev, gi0.querySelector('.gate-side')); }
+  var aw, ah;
+  if (mobile){
+    var pb = parseFloat(getComputedStyle(gi0).paddingBottom) || 0;
+    var avail = H - txt.offsetHeight - pb - 92 - 26;
+    ah = Math.max(140, Math.min(H * 0.4, avail));
+    aw = Math.min(W * 0.56, 250, ah / 1.35);
+  } else { aw = Math.min(W * 0.3, 500); ah = Math.min(H * 0.72, aw * 1.6); }
   var cx = mobile ? W * 0.5 : W * 0.69, top = mobile ? Math.max(92, H * 0.11) : Math.max(110, (H - ah) * 0.62);
   var r = aw / 2, bottom = top + ah;
   arch = { cx: cx, cy: top + ah * 0.55, w: aw, h: ah };
   wall.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
   var hole = 'M' + (cx - r) + ' ' + bottom + ' L' + (cx - r) + ' ' + (top + r) + ' A' + r + ' ' + r + ' 0 0 1 ' + (cx + r) + ' ' + (top + r) + ' L' + (cx + r) + ' ' + bottom + ' Z';
-  wallPath.setAttribute('d', 'M0 0 H' + W + ' V' + H + ' H0 Z ' + hole);
-  document.getElementById('wallTex').setAttribute('d', 'M0 0 H' + W + ' V' + H + ' H0 Z ' + hole);
+  arch.clip = 'inset(' + top + 'px ' + (W - cx - r) + 'px ' + (H - bottom) + 'px ' + (cx - r) + 'px round ' + r + 'px ' + r + 'px 0px 0px)';
+  if (!window.gsap || reduce || !gateDone) gatePhoto.style.clipPath = arch.clip;
   var R = r + 16;
   wallEdge.setAttribute('d', 'M' + (cx - R) + ' ' + bottom + ' L' + (cx - R) + ' ' + (top + r) + ' A' + R + ' ' + R + ' 0 0 1 ' + (cx + R) + ' ' + (top + r) + ' L' + (cx + R) + ' ' + bottom);
   var R2 = r + 34;
   document.getElementById('wallEdge2').setAttribute('d', 'M' + (cx - R2) + ' ' + bottom + ' L' + (cx - R2) + ' ' + (top + r) + ' A' + R2 + ' ' + R2 + ' 0 0 1 ' + (cx + R2) + ' ' + (top + r) + ' L' + (cx + R2) + ' ' + bottom + ' M' + (cx - R2 - 30) + ' ' + bottom + ' H' + (cx + R2 + 30));
   arch.bottom = bottom; arch.left = cx - R2; arch.right = cx + R2;
   wall.style.setProperty('--ox', cx + 'px'); wall.style.setProperty('--oy', (top + ah * 0.6) + 'px');
-  var ev = document.getElementById('gateEvent');
-  if (ev){ ev.style.top = (bottom - (mobile ? 30 : 46)) + 'px'; ev.style.left = mobile ? '' : (cx - ev.offsetWidth / 2) + 'px'; }
+  if (ev){ ev.style.top = mobile ? '' : (bottom - 46) + 'px'; ev.style.left = mobile ? '' : (cx - ev.offsetWidth / 2) + 'px'; }
   arch.off = mobile ? 0 : cx - W / 2;
   arch.offY = (top + ah * 0.55) - H * 0.47;
   var gi = document.getElementById('gateImg');
   if (!window.gsap || reduce) gi.style.transform = 'translate(' + arch.off + 'px,' + arch.offY + 'px) scale(1.18)';
 }
 drawWall();
-addEventListener('resize', function(){ drawWall(); if (hasGsap) ScrollTrigger.refresh(); });
+var lastW = innerWidth, rT = 0;
+addEventListener('resize', function(){
+  if (innerWidth === lastW && isTouch) return;
+  lastW = innerWidth; clearTimeout(rT);
+  rT = setTimeout(function(){ drawWall(); if (hasGsap) ScrollTrigger.refresh(); dispatchEvent(new Event('pc-resize')); }, 180);
+});
 
 /* ---------- testi riga per riga ---------- */
 document.querySelectorAll('.split-line').forEach(function(h){
@@ -1014,7 +1070,8 @@ if (hasGsap && !reduce){
   gateTl
     .to('.gate-intro', { opacity: 0, y: -40, duration: 0.25, ease: 'none' }, 0)
     .to('#dust', { opacity: 0, duration: 0.3, ease: 'none' }, 0)
-    .to('#wall', { scale: function(){ return Math.max(innerWidth, innerHeight) / arch.w * 3.2; }, transformOrigin: function(){ return arch.cx + 'px ' + arch.cy + 'px'; }, duration: 1, ease: 'power2.in' }, 0.05)
+    .to('#wall', { opacity: 0, scale: 1.12, transformOrigin: function(){ return arch.cx + 'px ' + arch.cy + 'px'; }, duration: 0.3, ease: 'power1.in' }, 0.04)
+    .fromTo('.gate-photo', { clipPath: function(){ return arch.clip; } }, { clipPath: 'inset(0px 0px 0px 0px round 0px 0px 0px 0px)', duration: 1, ease: 'power2.inOut' }, 0.04)
     .fromTo('#gateImg', { x: function(){ return arch.off; }, y: function(){ return arch.offY; }, scale: 1.18 }, { x: 0, y: 0, scale: 1, duration: 1.05, ease: 'power1.in' }, 0)
     .to('#gateFade', { opacity: 1, duration: 0.3 }, 0.72)
     .to('#welcome', { opacity: 1, duration: 0.25 }, 0.78);
@@ -1049,6 +1106,23 @@ if (hasGsap && !reduce){
       gsap.fromTo(d, { y: i % 2 ? 50 : -30, rotate: i % 2 ? 1.5 : -1.5 }, { y: i % 2 ? -30 : 50, rotate: 0, ease: 'none', scrollTrigger: { trigger: d, containerAnimation: slide, start: 'left right', end: 'right left', scrub: true } });
     });
     gsap.fromTo('.nye-hero img', { scale: 1.06 }, { scale: 1, ease: 'none', scrollTrigger: { trigger: '.nye-hero', start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+
+  // sezioni con due foto: la seconda sale e copre la prima
+  mm.add('(min-width: 901px)', function(){
+    gsap.utils.toArray('.feature').forEach(function(sec){
+      var tl = gsap.timeline({ scrollTrigger: { trigger: sec.querySelector('.feature-grid'), start: 'top top', end: 'bottom bottom', scrub: true } });
+      tl.to({}, { duration: 0.22 })
+        .to(sec.querySelector('.m2'), { yPercent: -100, ease: 'none', duration: 0.56 }, 0.22)
+        .to(sec.querySelector('.m2-in'), { yPercent: 100, ease: 'none', duration: 0.56 }, 0.22)
+        .to(sec.querySelector('.m1 img'), { scale: 1.08, ease: 'none', duration: 0.78 }, 0)
+        .to({}, { duration: 0.22 });
+    });
+  });
+  mm.add('(max-width: 900px)', function(){
+    gsap.utils.toArray('.media figure').forEach(function(f){
+      gsap.from(f, { y: 40, opacity: 0, duration: 1.1, ease: 'power3.out', scrollTrigger: { trigger: f, start: 'top 92%', once: true } });
+    });
   });
 
   // telefono: solo trasformazioni leggere, una volta sola
@@ -1108,7 +1182,7 @@ if (hasGsap && !reduce){
   var c = document.getElementById('dust'); if (!c || reduce) return;
   var x = c.getContext('2d'), d = Math.min(devicePixelRatio || 1, 1.5), W, H, ps = [], on = true;
   function size(){ W = c.offsetWidth; H = c.offsetHeight; c.width = W * d; c.height = H * d; x.setTransform(d, 0, 0, d, 0, 0); }
-  size(); addEventListener('resize', size);
+  size(); addEventListener('pc-resize', size);
   var n = innerWidth < 700 ? 26 : 60;
   for (var i = 0; i < n; i++) ps.push({ x: Math.random(), y: Math.random(), r: 0.6 + Math.random() * 1.8, s: 0.004 + Math.random() * 0.012, o: Math.random() * 6.28 });
   var started = false;
@@ -1139,7 +1213,7 @@ if (hasGsap && !reduce){
   document.documentElement.style.overflow = 'hidden';
   $('#dock').classList.add('hidden');
   gsap.set(heroBits, { y: 30, opacity: 0 });
-  gsap.set('#wall', { scale: 1.35, transformOrigin: function(){ return arch.cx + 'px ' + arch.cy + 'px'; } });
+  gsap.set('#wall', { opacity: 0 });
   var tl = gsap.timeline({ paused: true, onComplete: done });
   tl.to('#intro .mark img', { opacity: 1, y: 0, scale: 1, duration: 1.1, ease: 'power3.out' }, 0.15)
     .to('#intro .rule', { scaleX: 1, duration: 0.9, ease: 'power2.inOut' }, 0.55)
@@ -1149,12 +1223,12 @@ if (hasGsap && !reduce){
     .call(function(){ dispatchEvent(new Event('pc-doors')); }, null, 2.3)
     .to('#intro .dl', { xPercent: -100, duration: 1.25, ease: 'expo.inOut' }, 2.35)
     .to('#intro .dr', { xPercent: 100, duration: 1.25, ease: 'expo.inOut' }, 2.35)
-    .to('#wall', { scale: 1, duration: 1.6, ease: 'expo.out' }, 2.75)
+    .to('#wall', { opacity: 1, duration: 1.2, ease: 'power2.out' }, 2.9)
     .to(heroBits, { y: 0, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.09 }, 3.05);
   function done(){
     window.__introRunning = false;
     intro.remove();
-    gsap.set('#wall', { clearProps: 'scale' });
+    gsap.set('#wall', { clearProps: 'opacity' });
     document.documentElement.style.overflow = '';
     $('#dock').classList.remove('hidden');
     if (lenis) lenis.start();
@@ -1177,7 +1251,7 @@ function Fireworks(canvas){
   var word = null;
   var palette = ['#FFD27A', '#FFE7B0', '#FF9A4D', '#FFF6E8', '#F58B8B', '#C9DCFF', '#FFC0E0'];
   function size(){ var r = canvas.getBoundingClientRect(); W = r.width; H = r.height; canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
-  size(); addEventListener('resize', size);
+  size(); addEventListener('pc-resize', size);
   function burst(x, y, big){
     var c1 = palette[(Math.random() * palette.length) | 0], c2 = palette[(Math.random() * palette.length) | 0];
     var n = Math.round((big ? 220 : 110 + ((Math.random() * 70) | 0)) * (W < 700 ? 0.6 : 1)), sp = (big ? 5.2 : 3.6) + Math.random() * 1.6, ring = Math.random() < 0.22;
