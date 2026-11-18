@@ -259,7 +259,8 @@ footer p{margin:0}
   .menu-toggle{display:inline-flex;align-items:center}
   .nav.open{position:fixed;inset:0;flex-direction:column;justify-content:center;gap:22px;background:var(--night);z-index:50;color:#F2EADB}
   .nav.open a{display:block;font-size:22px}
-  .nav.open .menu-toggle{position:absolute;top:22px;right:16px;color:#F2EADB}
+  .nav.open a.btn{display:inline-flex;margin-top:8px}
+  .nav.open .menu-toggle{position:absolute;top:14px;right:14px;color:#F2EADB}
   .clock .l{display:none}
   .split,.split.rev,.ev-text,.contact-grid{grid-template-columns:minmax(0,1fr)}
   .split.rev > .text{order:0}
@@ -293,6 +294,28 @@ footer p{margin:0}
   .info div{grid-template-columns:minmax(0,1fr);gap:4px}
   .price strong{font-size:48px}
 }
+
+.menu-toggle .bars{display:flex;flex-direction:column;gap:4px;width:18px}
+.menu-toggle .bars i{display:block;height:2px;background:currentColor;border-radius:2px;transition:transform .3s, opacity .3s}
+.menu-toggle[aria-expanded="true"] .bars i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu-toggle[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
+.menu-toggle[aria-expanded="true"] .bars i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.menu-toggle .mt-label{margin-left:8px}
+@media (max-width:700px){
+  .top{gap:10px;padding:10px 14px}
+  .clock{padding-left:10px;gap:0}
+  .clock svg{display:none}
+  .clock .t{font-size:19px}
+  .nav{gap:8px}
+  .nav .btn{min-height:42px;padding:0 16px;font-size:13px}
+  .menu-toggle{width:44px;min-height:44px;padding:0;justify-content:center}
+  .menu-toggle .mt-label{display:none}
+  .nav.open .menu-toggle{width:auto;padding:0 14px}
+  .stack{height:125vw}
+  .stack .a{width:72%;height:80%}
+  .stack .b{width:64%;height:48%}
+  .mn-num{font-size:min(56vw,46vh)}
+}
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
   .gate-photo img{transform:none}
@@ -325,7 +348,7 @@ footer p{margin:0}
     <a href="#capodanno">Capodanno</a>
     <a href="#contatti">Contatti</a>
     <a class="btn btn-gold" href="#contatti">Prenota</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Apri il menu"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="mt-label">Menu</span></button>
   </nav>
 </header>
 
@@ -579,7 +602,7 @@ var nav = $('#nav'), toggle = $('.menu-toggle');
 toggle.addEventListener('click', function(){
   var open = nav.classList.toggle('open');
   toggle.setAttribute('aria-expanded', String(open));
-  toggle.textContent = open ? 'Chiudi' : 'Menu';
+  toggle.setAttribute('aria-label', open ? 'Chiudi il menu' : 'Apri il menu');
 });
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click', function(e){
@@ -587,7 +610,7 @@ document.querySelectorAll('a[href^="#"]').forEach(function(a){
     if (!t) return;
     e.preventDefault();
     if (a.dataset.type){ var r = document.querySelector('input[name="tipo"][value="' + a.dataset.type + '"]'); if (r) r.checked = true; }
-    nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.textContent = 'Menu';
+    nav.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Apri il menu');
     if (lenis) lenis.scrollTo(t, { duration: 1.8 }); else t.scrollIntoView();
     history.replaceState(null, '', id);
   });
