@@ -44,7 +44,7 @@
 }
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background-color 1.2s ease,color 1.2s ease}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;transition:background-color .8s ease,color .8s ease}
 body.is-night{--fg:#F4ECDD;--soft:#E6DECB;--line:rgba(244,236,221,.2);--accent:#E9C783;color-scheme:dark}
 img{max-width:100%;display:block}
 a{color:inherit}
@@ -69,7 +69,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 
 /* testata */
 .top{position:fixed;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:24px;padding:12px clamp(16px,4vw,48px);transition:background .5s, transform .5s}
-.top.scrolled{background:color-mix(in srgb,var(--bg) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.top.scrolled{background:color-mix(in srgb,var(--bg) 94%,transparent)}
 .brand{position:relative;display:block;width:112px;height:76px;flex:none}
 .brand img{position:absolute;inset:0;width:100%;height:auto;transition:opacity .8s}
 .brand .gold{opacity:0}
@@ -96,7 +96,8 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate-wall{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transform-origin:var(--ox,68%) var(--oy,58%)}
 .gate-wall .edge{fill:none;stroke:#C99A45;stroke-width:2.5}
 .gate-wall .edge2{fill:none;stroke:rgba(201,154,69,.35);stroke-width:1}
-.dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:opacity 1.8s ease}
+.dust.wait{opacity:0}
 .gate-intro{position:absolute;inset:0;display:flex;align-items:center;padding:110px clamp(20px,5vw,72px) 40px;pointer-events:none}
 .gate-intro .txt{width:min(560px,46%);pointer-events:auto}
 .gate h1{font-size:clamp(64px,8.4vw,136px);line-height:.9;letter-spacing:-.02em;color:#F4ECDD}
@@ -146,7 +147,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate-facts li:last-child{border-right:0;margin-right:0}
 .gate-facts b{display:block;font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.1;color:#F4ECDD}
 .gate-facts span{display:block;margin-top:4px;font-size:13px;color:#BDB8A3;line-height:1.35}
-.gate-event{position:absolute;pointer-events:auto;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:14px;background:rgba(20,24,15,.82);border:1px solid rgba(201,154,69,.55);color:#F4ECDD;text-decoration:none;box-shadow:0 20px 50px rgba(0,0,0,.35);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:transform .3s, border-color .3s}
+.gate-event{position:absolute;pointer-events:auto;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 12px;border-radius:14px;background:rgba(20,24,15,.82);border:1px solid rgba(201,154,69,.55);color:#F4ECDD;text-decoration:none;box-shadow:0 20px 50px rgba(0,0,0,.35);background:rgba(20,24,15,.94);transition:transform .3s, border-color .3s}
 .gate-event:hover{transform:translateY(-3px);border-color:#E9C783}
 .ge-date{display:grid;place-items:center;width:58px;height:62px;border-radius:10px;background:#C99A45;color:#1C150A;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;line-height:1}
 .ge-date b{font-family:var(--font-display);font-weight:500;font-size:30px;letter-spacing:0}
@@ -192,6 +193,9 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 }
 @keyframes navIn{to{opacity:1;transform:none}}
 
+#masseria{z-index:2;background:#F4EDE1;margin-top:-4px}
+#masseria::before{content:"";position:absolute;left:0;right:0;top:-60px;height:62px;background:linear-gradient(180deg,rgba(244,237,225,0),#F4EDE1);pointer-events:none}
+
 /* capitoli */
 .chapter{position:relative;padding:clamp(110px,16vh,180px) 0}
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(32px,6vw,96px);align-items:center}
@@ -202,7 +206,8 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .stack figure img{width:100%;height:100%;object-fit:cover}
 .stack .a{left:0;top:0;width:62%;height:88%}
 .stack .b{right:0;bottom:0;width:60%;height:46%;border:8px solid var(--bg);transition:border-color 1.2s}
-.reveal-img{clip-path:inset(0 0 0 0)}
+.reveal-img{will-change:transform}
+.reveal-img img{will-change:transform}
 .facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:40px 0 0;padding:24px 0 0;border-top:1px solid var(--line)}
 .facts dt{font-family:var(--font-display);font-size:48px;line-height:1;font-variant-numeric:tabular-nums}
 .facts dd{margin:8px 0 0;font-size:14px;color:var(--soft);line-height:1.4}
@@ -244,6 +249,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 }
 @keyframes sheetUp{from{transform:translateY(100%)}}
 @keyframes marquee{to{transform:translateX(-50%)}}
+.offscreen .row,.offscreen .vinyl,.offscreen .eq i,.offscreen .spark{animation-play-state:paused!important}
 .band:hover .row{animation-play-state:paused}
 
 /* la terra: foto a tutta larghezza */
@@ -256,7 +262,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .full .over .lead{color:#F1EADA}
 .full h2 em{color:#E7C989}
 .farm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:30px 0 0;padding:0;list-style:none;max-width:36rem}
-.farm li{border-radius:12px;background:rgba(14,17,9,.72);border:1px solid rgba(233,199,131,.32);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .3s,border-color .3s}
+.farm li{border-radius:12px;background:rgba(14,17,9,.72);border:1px solid rgba(233,199,131,.32);background:rgba(14,17,9,.84);transition:transform .3s,border-color .3s}
 .farm li:hover{transform:translateY(-2px);border-color:#E9C783}
 .farm svg{grid-row:1 / span 2;width:34px;height:34px;padding:6px;border-radius:50%;background:rgba(233,199,131,.14);fill:none;stroke:#E9C783;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .farm b{font-size:15px;font-weight:700;color:#FBF6EC;line-height:1.2}
@@ -291,7 +297,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .events-grid .e1{grid-column:1 / -1;aspect-ratio:21/10}
 .events-grid .e2{grid-column:1 / -1;aspect-ratio:21/9}
 .events-grid figure{position:relative}
-.events-grid figcaption{position:absolute;left:20px;bottom:16px;padding:6px 12px;border-radius:999px;background:rgba(20,14,8,.55);color:#F7F1E6;font-size:14px;font-weight:600;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.events-grid figcaption{position:absolute;left:20px;bottom:16px;padding:6px 12px;border-radius:999px;background:rgba(20,14,8,.72);color:#F7F1E6;font-size:14px;font-weight:600}
 .ev-text{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(30px,5vw,80px);align-items:end}
 
 /* capodanno */
@@ -306,7 +312,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .nye-hero .eyebrow,.nye-hero h2 em{color:#E7C989}
 .nye-hero .lead{color:#E2D8C4}
 .cd{display:flex;gap:10px;margin:30px 0 0;max-width:420px}
-.cd div{flex:1;padding:12px 6px;border:1px solid rgba(231,201,137,.45);border-radius:4px;text-align:center;background:rgba(7,12,10,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.cd div{flex:1;padding:12px 6px;border:1px solid rgba(231,201,137,.45);border-radius:4px;text-align:center;background:rgba(7,12,10,.66)}
 .cd b{display:block;font-family:var(--font-display);font-weight:400;font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
 .cd span{display:block;margin-top:6px;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#CFC5B0}
 .nye-body{position:relative;padding:70px 0 130px;background:radial-gradient(ellipse 60% 45% at 12% 8%,rgba(201,154,69,.20),rgba(201,154,69,0) 70%),radial-gradient(ellipse 55% 50% at 92% 55%,rgba(122,24,48,.38),rgba(122,24,48,0) 70%),radial-gradient(ellipse 70% 40% at 50% 100%,rgba(201,154,69,.14),rgba(201,154,69,0) 70%),#0D1512;overflow:hidden}
@@ -316,9 +322,9 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .mc-kick{margin:0;text-align:center;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#8A6220}
 .mc-title{margin:10px 0 0;text-align:center;font-size:clamp(36px,4.4vw,58px);line-height:1.05;color:#1F1C16}
 .mc-title em{font-style:italic;color:#8A6220}
-.menu-card .menu{margin-top:30px;border-color:rgba(31,28,22,.16)}
-.menu-card .menu h3{color:#8A6220}
-.menu-card .menu li{color:#1F1C16}
+
+
+
 .menu-card .menu li small{color:#5A5343;font-family:var(--font-text);font-size:15.5px}
 .menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 48px;padding:34px 0 6px;border-top:1px solid rgba(242,234,219,.18)}
 .menu h3{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#D8AE5E;margin:0 0 10px}
@@ -335,6 +341,76 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .price .inc strong{font-size:22px;line-height:1.35}
 .nye .btn-line{color:#F2EADB}
 .nye .btn-line:hover{background:#F2EADB;color:var(--night)}
+
+/* menu del cenone, impaginato come un menu stampato */
+.menu-card{position:relative;background:radial-gradient(ellipse 90% 70% at 50% 0%,#FBF5E9,#F3E9D5);color:#1F1C16;border-radius:18px;padding:clamp(34px,5vw,72px) clamp(22px,5vw,72px);box-shadow:0 40px 100px rgba(0,0,0,.5);outline:1px solid rgba(201,154,69,.7);outline-offset:-14px}
+.mc-corner{position:absolute;width:44px;height:44px;border:2px solid #C99A45;pointer-events:none}
+.mc-corner.tl{top:22px;left:22px;border-right:0;border-bottom:0;border-top-left-radius:10px}
+.mc-corner.tr{top:22px;right:22px;border-left:0;border-bottom:0;border-top-right-radius:10px}
+.mc-corner.bl{bottom:22px;left:22px;border-right:0;border-top:0;border-bottom-left-radius:10px}
+.mc-corner.br{bottom:22px;right:22px;border-left:0;border-top:0;border-bottom-right-radius:10px}
+.mc-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(28px,5vw,80px);margin-top:34px;padding-top:6px;border-top:1px solid rgba(138,98,32,.25)}
+.course{margin:28px 0 0;text-align:center}
+.course h4{display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 14px;font-family:var(--font-body);font-size:12.5px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#8A6220}
+.course h4::before,.course h4::after{content:"";flex:0 1 54px;height:1px;background:linear-gradient(90deg,rgba(138,98,32,0),rgba(138,98,32,.6))}
+.course h4::after{transform:scaleX(-1)}
+.course h4 i{font-family:var(--font-display);font-style:normal;font-weight:500;font-size:15px;letter-spacing:0;color:#B48539;margin-right:-4px}
+.course ul{margin:0;padding:0;list-style:none;display:grid;gap:13px}
+.course b{display:block;font-family:var(--font-display);font-weight:400;font-size:22px;line-height:1.2;color:#1F1C16}
+.course span{display:block;margin-top:3px;font-family:var(--font-text);font-style:italic;font-size:16.5px;line-height:1.4;color:#5A5343;text-wrap:balance}
+.mc-midnight{display:flex;align-items:center;justify-content:center;gap:22px;margin:38px 0 0;padding:20px 26px;border-radius:14px;background:linear-gradient(120deg,#16231C,#0E1512);color:#F4ECDD;box-shadow:inset 0 0 0 1px rgba(201,154,69,.5);text-align:left}
+.mm-clock{font-family:var(--font-display);font-size:40px;line-height:1;color:#E9C783;font-variant-numeric:tabular-nums}
+.mm-k{margin:0;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E9C783}
+.mm-t{margin:4px 0 0;font-family:var(--font-display);font-size:23px;line-height:1.2}
+.mc-foot{margin-top:30px;text-align:center}
+.mc-drinks{margin:0;font-family:var(--font-text);font-style:italic;font-size:17.5px;color:#5A5343}
+.mc-prices{display:flex;align-items:center;justify-content:center;gap:26px;margin-top:14px}
+.mc-prices div{display:flex;flex-direction:column;align-items:center}
+.mc-prices small{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8A6220}
+.mc-prices strong{font-family:var(--font-display);font-weight:400;font-size:clamp(44px,5vw,60px);line-height:1;font-variant-numeric:tabular-nums}
+.mc-dot{width:8px;height:8px;background:#C99A45;transform:rotate(45deg)}
+/* la festa: ogni card ha la forma del suo oggetto */
+.party{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:30px 0 0;padding:0;list-style:none}
+.party li{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:190px;padding:22px;border-radius:16px;overflow:hidden;color:#F4ECDD;border:0;background:none}
+.party b{position:relative;margin-top:auto;font-family:var(--font-display);font-weight:400;font-size:26px;line-height:1.1}
+.party small{position:relative;font-size:14px;color:rgba(244,236,221,.8)}
+.party li.p-dj{background:linear-gradient(150deg,#2A1F3D,#14101F);box-shadow:inset 0 0 0 1px rgba(170,140,255,.25)}
+.vinyl{position:absolute;right:-26px;top:-26px;width:130px;height:130px;border-radius:50%;background:repeating-radial-gradient(circle,#111 0 2px,#1d1d1d 2px 4px);box-shadow:0 10px 30px rgba(0,0,0,.5);animation:spin 3.2s linear infinite}
+.vinyl i{position:absolute;inset:38%;border-radius:50%;background:radial-gradient(circle,#14101F 0 12%,#C99A45 13% 100%)}
+.eq{display:flex;align-items:flex-end;gap:4px;height:34px}
+.eq i{width:5px;height:100%;border-radius:2px;background:#B9A2FF;transform-origin:bottom;animation:eq 1s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.2s}.eq i:nth-child(3){animation-delay:-.45s}.eq i:nth-child(4){animation-delay:-.7s}.eq i:nth-child(5){animation-delay:-.1s}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes eq{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.party li.p-gift{background:#9E2B2B linear-gradient(90deg,transparent calc(50% - 9px),#E9C783 calc(50% - 9px) calc(50% + 9px),transparent calc(50% + 9px));color:#FFF7EC}
+.p-gift svg{width:58px;height:58px;padding:8px;border-radius:12px;background:rgba(0,0,0,.2);fill:none;stroke:#FFF1D6;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.p-gift b,.p-gift small{padding:2px 8px;border-radius:6px;background:#9E2B2B;color:#FFF7EC}
+.party li.p-ticket{background:#F2D894;color:#2B1F0B;border-radius:12px;-webkit-mask:radial-gradient(circle 13px at 0 50%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,transparent 98%,#000) right/51% 100% no-repeat;mask:radial-gradient(circle 13px at 0 50%,transparent 98%,#000) left/51% 100% no-repeat,radial-gradient(circle 13px at 100% 50%,transparent 98%,#000) right/51% 100% no-repeat}
+.p-ticket::after{content:"";position:absolute;left:20px;right:20px;top:50%;border-top:2px dashed rgba(43,31,11,.35)}
+.p-ticket small{color:rgba(43,31,11,.78)}
+.tk-num{font-family:var(--font-display);font-size:30px;letter-spacing:.04em;color:#8A2B1E}
+.party li.p-fire{background:radial-gradient(circle at 70% 25%,rgba(233,199,131,.35),rgba(233,199,131,0) 55%),linear-gradient(160deg,#101A2E,#070B14)}
+.p-fire svg{width:70px;height:70px;fill:#FFE3A1;stroke:#FFD27A;stroke-width:2.2;stroke-linecap:round}
+.p-fire .spark{transform-origin:24px 24px;animation:burstFx 2.4s ease-out infinite}
+@keyframes burstFx{0%{transform:scale(.3);opacity:0}25%{opacity:1}100%{transform:scale(1.15);opacity:0}}
+/* camere: la camera grande e intera */
+.stack-rooms{height:auto}
+.stack-rooms .a{position:relative;left:auto;top:auto;width:100%;height:auto;aspect-ratio:3/2}
+.stack-rooms .b{width:34%;height:auto;aspect-ratio:3/4;right:-5%;bottom:-16%}
+@media (max-width:980px){.party{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){
+  .mc-cols{grid-template-columns:minmax(0,1fr)}
+  .mc-corner{width:28px;height:28px}
+  .mc-corner.tl,.mc-corner.tr{top:14px}.mc-corner.bl,.mc-corner.br{bottom:14px}.mc-corner.tl,.mc-corner.bl{left:14px}.mc-corner.tr,.mc-corner.br{right:14px}
+  .course b{font-size:20px}.course span{font-size:15.5px}
+  .mc-midnight{flex-direction:column;text-align:center;gap:8px}
+  .party li{min-height:160px;padding:16px}
+  .party b{font-size:21px}
+  .vinyl{width:96px;height:96px}
+  .stack-rooms .a{aspect-ratio:3/2}
+  .stack-rooms .b{position:relative;width:46%;aspect-ratio:3/4;margin:-14% 4% 0 auto;right:auto;bottom:auto}
+}
+@media (prefers-reduced-motion:reduce){.vinyl,.eq i,.p-fire .spark{animation:none}}
 
 /* mezzanotte */
 .midnight{position:relative;height:340vh;background:var(--night);color:#F2EADB}
@@ -632,9 +708,9 @@ footer p{margin:0}
         </ul>
         <p class="note">D'estate c'è anche la piscina panoramica, in mezzo al verde.</p>
       </div>
-      <div class="stack">
-        <figure class="a reveal-img" data-speed="-6"><img src="assets/casa-1080.webp" srcset="assets/casa-640.webp 640w, assets/casa-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 36vw" loading="lazy" decoding="async" alt="L'ingresso delle camere con le scale, la palma e la vista sulla valle"></figure>
-        <figure class="b reveal-img" data-speed="10"><img src="assets/camera-1080.webp" srcset="assets/camera-640.webp 640w, assets/camera-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 36vw" loading="lazy" decoding="async" alt="Una camera matrimoniale con il soffitto in legno a vista"></figure>
+      <div class="stack stack-rooms">
+        <figure class="a reveal-img" data-speed="-4"><img src="assets/camera-1080.webp" srcset="assets/camera-640.webp 640w, assets/camera-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 46vw" loading="lazy" decoding="async" alt="Una camera matrimoniale con il soffitto in legno a vista"></figure>
+        <figure class="b reveal-img" data-speed="10"><img src="assets/casa-1080.webp" srcset="assets/casa-640.webp 640w, assets/casa-1080.webp 1080w" sizes="(max-width: 700px) 92vw, 36vw" loading="lazy" decoding="async" alt="L'ingresso delle camere con le scale, la palma e la vista sulla valle"></figure>
       </div>
     </div>
   </section>
@@ -677,23 +753,52 @@ footer p{margin:0}
     <div class="nye-body">
       <div class="wrap">
         <div class="menu-card">
+          <span class="mc-corner tl"></span><span class="mc-corner tr"></span><span class="mc-corner bl"></span><span class="mc-corner br"></span>
           <p class="mc-kick">31 dicembre 2026 · Ponte Calatrasi</p>
           <h3 class="mc-title">Il menu <em>della serata</em></h3>
-          <div class="menu">
-          <div><h3>Il benvenuto</h3><ul><li>Prosecco e stuzzichini dello chef</li></ul></div>
-          <div><h3>Antipasti</h3><ul><li>Terrina di patate<small>con stracotto di carne e salsa al marsala</small></li><li>Fagottino di crêpes<small>salsa mornay al parmigiano e funghi di bosco</small></li><li>Roast beef di vitello<small>salsa tonnata e cipolla rossa in agrodolce</small></li><li>Sformatino di melanzane<small>cuore filante di mozzarella e basilico</small></li><li>Montanarina<small>pere saltate, speck e noci</small></li></ul></div>
-          <div><h3>A centro tavola</h3><ul><li>I formaggi del nostro caseificio</li><li>I fritti di stagione</li><li>Sfincionello palermitano<small>e bocconcino con porchetta, confettura vegetale e rucola</small></li></ul></div>
-          <div><h3>I primi</h3><ul><li>Paccheri al pesto di pistacchio<small>fiammiferi di speck croccante e basilico</small></li><li>Ravioli di mozzarella di bufala<small>sugo d'arrosto, salsa al prezzemolo e limone, carciofi fritti</small></li></ul></div>
-          <div><h3>Il secondo</h3><ul><li>Tournedos di filetto di bovino<small>crema di patate affumicata, demi-glace, scaccio di Sicilia e verdure invernali</small></li></ul></div>
-          <div><h3>Dolci e mezzanotte</h3><ul><li>Piccola pasticceria artigianale<small>tiramisù, cassatelle, bignè alla crema</small></li><li>Dopo il brindisi<small>lenticchie augurali, pandoro e panettone</small></li></ul></div>
+          <div class="mc-cols">
+            <div class="mc-col">
+              <section class="course"><h4><i>I</i>Il benvenuto</h4><ul><li><b>Prosecco e stuzzichini dello chef</b></li></ul></section>
+              <section class="course"><h4><i>II</i>Antipasti</h4><ul>
+                <li><b>Terrina di patate</b><span>con stracotto di carne e salsa al marsala</span></li>
+                <li><b>Fagottino di crêpes</b><span>salsa mornay al parmigiano e funghi di bosco</span></li>
+                <li><b>Roast beef di vitello</b><span>su misticanza invernale, salsa tonnata e cipolla rossa in agrodolce</span></li>
+                <li><b>Sformatino di melanzane</b><span>cuore filante di mozzarella e basilico</span></li>
+                <li><b>Montanarina</b><span>brunoise di pere saltate, speck e noci</span></li></ul></section>
+            </div>
+            <div class="mc-col">
+              <section class="course"><h4><i>III</i>A centro tavola</h4><ul>
+                <li><b>I formaggi del nostro caseificio</b></li>
+                <li><b>I fritti di stagione</b></li>
+                <li><b>Sfincionello palermitano</b><span>e bocconcino con porchetta, confettura vegetale e rucola</span></li></ul></section>
+              <section class="course"><h4><i>IV</i>I primi</h4><ul>
+                <li><b>Paccheri al pesto di pistacchio</b><span>fiammiferi di speck croccante e basilico</span></li>
+                <li><b>Ravioli di mozzarella di bufala</b><span>sugo d'arrosto, salsa al prezzemolo e limone, carciofi fritti</span></li></ul></section>
+              <section class="course"><h4><i>V</i>Il secondo</h4><ul>
+                <li><b>Tournedos di filetto di bovino</b><span>su crema di patate affumicata, la sua demi-glace e scaccio di Sicilia, con lingotto di verdure invernali</span></li></ul></section>
+              <section class="course"><h4><i>VI</i>Il dolce</h4><ul>
+                <li><b>Piccola pasticceria artigianale</b><span>tiramisù, cassatelle, bignè alla crema pasticcera</span></li></ul></section>
+            </div>
+          </div>
+          <div class="mc-midnight">
+            <span class="mm-clock">00:00</span>
+            <div><p class="mm-k">Dopo il brindisi di mezzanotte</p><p class="mm-t">Lenticchie augurali, pandoro e panettone</p></div>
+          </div>
+          <div class="mc-foot">
+            <p class="mc-drinks">Comprese nel prezzo: acqua, vino in bottiglia, caffè e amari</p>
+            <div class="mc-prices">
+              <div><small>Adulti</small><strong>100 €</strong></div>
+              <span class="mc-dot" aria-hidden="true"></span>
+              <div><small>Bambini</small><strong>35 €</strong></div>
+            </div>
+          </div>
         </div>
-        </div>
-        <ul class="party"><li class="dj">DJ set con Bruno</li><li>Gadget</li><li>Sorteggi</li><li>Fuochi d'artificio a mezzanotte</li></ul>
-        <div class="price">
-          <div><small>Adulti</small><strong>100 €</strong></div>
-          <div><small>Bambini</small><strong>35 €</strong></div>
-          <div class="inc"><small>Bevande comprese</small><strong>acqua, vino in bottiglia,<br>caffè e amari</strong></div>
-        </div>
+        <ul class="party" aria-label="Durante la serata">
+          <li class="p-dj"><span class="vinyl" aria-hidden="true"><i></i></span><span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span><b>DJ set</b><small>in consolle: Bruno</small></li>
+          <li class="p-gift"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="20" width="34" height="22" rx="2"/><rect x="5" y="13" width="38" height="8" rx="2"/><path d="M24 13v29"/><path d="M24 13c-3-6-11-7-11-2s8 2 11 2Zm0 0c3-6 11-7 11-2s-8 2-11 2Z"/></svg><b>Gadget</b><small>un pensiero per ogni ospite</small></li>
+          <li class="p-ticket"><span class="tk-num" aria-hidden="true">N° 2027</span><b>Sorteggi</b><small>tieni il tuo biglietto</small></li>
+          <li class="p-fire"><svg viewBox="0 0 48 48" aria-hidden="true"><g class="spark"><path d="M24 6v8M24 34v8M6 24h8M34 24h8M11 11l6 6M31 31l6 6M37 11l-6 6M17 31l-6 6"/></g><circle cx="24" cy="24" r="3"/></svg><b>Fuochi d'artificio</b><small>allo scoccare della mezzanotte</small></li>
+        </ul>
         <div class="ctas">
           <a class="btn btn-gold" href="#contatti" data-type="Il Cenone di Capodanno">Prenota il cenone</a>
           <a class="btn btn-line" href="tel:+393331233806">Chiama 333 123 3806</a>
@@ -782,7 +887,7 @@ var hasGsap = !!(window.gsap && window.ScrollTrigger);
 /* ---------- scroll morbido ---------- */
 var lenis = null;
 var isTouch = matchMedia('(hover: none), (pointer: coarse)').matches;
-if (hasGsap) ScrollTrigger.config({ ignoreMobileResize: true });
+if (hasGsap) ScrollTrigger.config({ ignoreMobileResize: true, limitCallbacks: true });
 if (!reduce && !isTouch && window.Lenis){
   lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
   if (hasGsap){
@@ -919,7 +1024,7 @@ if (hasGsap && !reduce){
     gsap.from(h.querySelectorAll('.w > span'), { yPercent: 110, duration: 1.1, ease: 'power4.out', stagger: 0.05, scrollTrigger: { trigger: h, start: 'top 86%', once: true } });
   });
   // testi e liste
-  gsap.utils.toArray('.lead, .facts, .ticks, .farm, .quote, .note, .ctas, .menu > div, .party, .price, .info, form').forEach(function(el){
+  gsap.utils.toArray('.lead, .facts, .ticks, .farm, .quote, .note, .ctas, .course, .mc-midnight, .mc-foot, .party li, .info, form').forEach(function(el){
     if (el.closest('.gate')) return;
     gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
   });
@@ -928,7 +1033,7 @@ if (hasGsap && !reduce){
   // computer: effetti pieni
   mm.add('(min-width: 701px)', function(){
     gsap.utils.toArray('.reveal-img').forEach(function(f){
-      gsap.fromTo(f, { clipPath: 'inset(14% 10% 14% 10%)' }, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'power2.out', scrollTrigger: { trigger: f, start: 'top 92%', end: 'top 35%', scrub: 1 } });
+      gsap.from(f, { y: 60, opacity: 0, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: f, start: 'top 90%', once: true } });
       gsap.fromTo(f.querySelector('img'), { scale: 1.25 }, { scale: 1.02, ease: 'none', scrollTrigger: { trigger: f, start: 'top bottom', end: 'bottom top', scrub: true } });
     });
     gsap.utils.toArray('[data-speed]').forEach(function(el){
@@ -990,6 +1095,14 @@ if (hasGsap && !reduce){
   dlg.addEventListener('close', function(){ if (lenis) lenis.start(); btns[cur].focus({ preventScroll: true }); });
 })();
 
+
+/* ---------- animazioni ferme quando non si vedono ---------- */
+(function(){
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ e.target.classList.toggle('offscreen', !e.isIntersecting); }); }, { rootMargin: '100px' });
+  document.querySelectorAll('.band, .party').forEach(function(el){ el.classList.add('offscreen'); io.observe(el); });
+})();
+
 /* ---------- pulviscolo dorato sul muro ---------- */
 (function(){
   var c = document.getElementById('dust'); if (!c || reduce) return;
@@ -998,8 +1111,10 @@ if (hasGsap && !reduce){
   size(); addEventListener('resize', size);
   var n = innerWidth < 700 ? 26 : 60;
   for (var i = 0; i < n; i++) ps.push({ x: Math.random(), y: Math.random(), r: 0.6 + Math.random() * 1.8, s: 0.004 + Math.random() * 0.012, o: Math.random() * 6.28 });
-  new IntersectionObserver(function(es){ var was = on; on = es[0].isIntersecting; if (on && !was && !window.__introRunning) requestAnimationFrame(f); }).observe(c);
+  var started = false;
+  new IntersectionObserver(function(es){ var was = on; on = es[0].isIntersecting; if (on && !was && started) requestAnimationFrame(f); }).observe(c);
   function f(t){
+    started = true;
     x.clearRect(0, 0, W, H);
     for (var i = 0; i < ps.length; i++){
       var p = ps[i]; p.y -= p.s / 60; p.x += Math.sin(t / 3000 + p.o) * 0.00025; if (p.y < -0.02){ p.y = 1.02; p.x = Math.random(); }
@@ -1008,7 +1123,7 @@ if (hasGsap && !reduce){
     }
     if (on) requestAnimationFrame(f);
   }
-  if (document.getElementById('intro') && !reduce) addEventListener('pc-intro-done', function(){ requestAnimationFrame(f); }, { once: true });
+  if (document.getElementById('intro') && !reduce){ c.classList.add('wait'); addEventListener('pc-doors', function(){ requestAnimationFrame(f); requestAnimationFrame(function(){ c.classList.remove('wait'); }); }, { once: true }); }
   else requestAnimationFrame(f);
 })();
 
@@ -1031,6 +1146,7 @@ if (hasGsap && !reduce){
     .to('#intro .tag', { opacity: 1, duration: 0.7 }, 0.9)
     .to('#intro .skipi', { opacity: 1, duration: 0.6 }, 1.2)
     .to('#intro .mark, #intro .skipi', { opacity: 0, y: -16, duration: 0.5, ease: 'power2.in' }, 2.05)
+    .call(function(){ dispatchEvent(new Event('pc-doors')); }, null, 2.3)
     .to('#intro .dl', { xPercent: -100, duration: 1.25, ease: 'expo.inOut' }, 2.35)
     .to('#intro .dr', { xPercent: 100, duration: 1.25, ease: 'expo.inOut' }, 2.35)
     .to('#wall', { scale: 1, duration: 1.6, ease: 'expo.out' }, 2.75)
@@ -1042,7 +1158,7 @@ if (hasGsap && !reduce){
     document.documentElement.style.overflow = '';
     $('#dock').classList.remove('hidden');
     if (lenis) lenis.start();
-    setTimeout(function(){ ScrollTrigger.refresh(); dispatchEvent(new Event('pc-intro-done')); }, 250);
+    dispatchEvent(new Event('pc-intro-done'));
   }
   intro.addEventListener('click', function(){ tl.progress(1); });
   var started = false;
@@ -1131,7 +1247,7 @@ function Fireworks(canvas){
 }
 var fwHero = Fireworks($('#fwHero')), fwMid = Fireworks($('#fwMid'));
 function watch(el, fw, rate){
-  new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ fw.start(); fw.setRate(rate); } else { fw.stop(); } }); }, { threshold: 0.05 }).observe(el);
+  new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ fw.start(); if (rate) fw.setRate(rate); } else { fw.stop(); } }); }, { threshold: 0.05, rootMargin: '-18% 0px -18% 0px' }).observe(el);
 }
 watch($('.nye-hero'), fwHero, 0.9);
 watch($('#mezzanotte'), fwMid, 0);
@@ -1155,7 +1271,7 @@ function updateMidnight(){
     mnSec.classList.toggle('done', f); mnEnd.classList.toggle('show', f);
     if (f){
       var c = fwMid.center(); fwMid.burst(c[0], c[1], true);
-      fwMid.showWord('2027'); fwMid.setRate(2.2);
+      fwMid.showWord('2027'); fwMid.setRate(innerWidth < 700 ? 1.2 : 2.2);
       for (var k = 0; k < 6; k++) setTimeout(function(){ fwMid.launch(true); }, k * 160);
     } else { fwMid.hideWord(); fwMid.setRate(0); }
   }
@@ -1197,7 +1313,7 @@ $('#copy').addEventListener('click', function(){
   navigator.clipboard.writeText($('#msg').textContent).then(function(){ b.textContent = 'Copiato'; }, function(){ b.textContent = 'Seleziona e copia il testo sopra'; });
 });
 
-if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (!hasGsap) return; if (window.__introRunning) addEventListener('pc-intro-done', function(){ ScrollTrigger.refresh(); }, { once: true }); else ScrollTrigger.refresh(); });
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ if (!hasGsap) return; var later = function(){ (window.requestIdleCallback || function(f){ setTimeout(f, 300); })(function(){ ScrollTrigger.refresh(); }, { timeout: 2000 }); }; if (window.__introRunning) addEventListener('pc-intro-done', later, { once: true }); else later(); });
 })();
 </script>
 </body>
