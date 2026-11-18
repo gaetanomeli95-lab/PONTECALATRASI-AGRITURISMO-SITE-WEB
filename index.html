@@ -212,6 +212,36 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .band .row span{display:inline-flex;align-items:center;gap:48px}
 .band .row span::after{content:"";width:10px;height:10px;background:#F4ECDD;transform:rotate(45deg)}
 
+
+.farm-btn{all:unset;box-sizing:border-box;display:grid;grid-template-columns:34px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-items:center;width:100%;height:100%;padding:12px 14px;border-radius:12px;cursor:pointer}
+.farm-btn:focus-visible{outline:2px solid #E9C783;outline-offset:2px}
+.farm li{padding:0;position:relative}
+.farm li::after{content:"+";position:absolute;top:6px;right:9px;font-size:15px;line-height:1;color:#E9C783;opacity:.75}
+.farm-pop{border:0;padding:0;background:transparent;max-width:min(520px,calc(100% - 32px));width:100%;color:#F4ECDD;overflow:visible}
+.farm-pop::backdrop{background:rgba(8,10,5,.6);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.fp-in{position:relative;padding:34px 32px 24px;border-radius:20px;background:linear-gradient(160deg,#2C3722,#1A2013);border:1px solid rgba(233,199,131,.45);box-shadow:0 40px 90px rgba(0,0,0,.5)}
+.farm-pop[open] .fp-in{animation:popIn .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes popIn{from{opacity:0;transform:translateY(24px) scale(.96)}}
+.fp-x{position:absolute;top:14px;right:14px;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,236,221,.25);background:transparent;color:#F4ECDD;cursor:pointer}
+.fp-x:hover{background:rgba(244,236,221,.1)}
+.fp-ico svg{width:72px;height:72px;padding:16px;border-radius:50%;background:rgba(233,199,131,.14);border:1px solid rgba(233,199,131,.4);fill:none;stroke:#E9C783;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.fp-kick{margin:18px 0 6px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#E9C783}
+.farm-pop h3{font-size:clamp(32px,4vw,42px);line-height:1.05}
+.fp-text{margin:14px 0 0;font-family:var(--font-text);font-size:20px;line-height:1.55;color:#E6DECB}
+.fp-lbl{margin:22px 0 8px;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#BDB8A3}
+.fp-tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.fp-tags li{padding:8px 14px;border-radius:999px;background:#E9C783;color:#1C150A;font-size:14px;font-weight:700}
+.fp-nav{display:flex;align-items:center;justify-content:space-between;margin-top:26px;padding-top:16px;border-top:1px solid rgba(244,236,221,.14);font-size:13px;font-weight:700;letter-spacing:.12em;color:#BDB8A3}
+.fp-nav button{width:44px;height:44px;border-radius:50%;border:1px solid rgba(244,236,221,.25);background:transparent;color:#F4ECDD;font-size:18px;cursor:pointer}
+.fp-nav button:hover{background:rgba(244,236,221,.1)}
+@media (max-width:700px){
+  .farm-pop{max-width:100%;width:100%;margin:auto 0 0;max-height:none}
+  .fp-in{border-radius:22px 22px 0 0;padding:30px 22px calc(20px + env(safe-area-inset-bottom))}
+  .farm-pop[open] .fp-in{animation:sheetUp .45s cubic-bezier(.2,.8,.2,1)}
+  .fp-ico svg{width:60px;height:60px;padding:13px}
+  .fp-text{font-size:18.5px}
+}
+@keyframes sheetUp{from{transform:translateY(100%)}}
 @keyframes marquee{to{transform:translateX(-50%)}}
 .band:hover .row{animation-play-state:paused}
 
@@ -224,7 +254,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .full .over .lead{color:#F1EADA}
 .full h2 em{color:#E7C989}
 .farm{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:30px 0 0;padding:0;list-style:none;max-width:36rem}
-.farm li{display:grid;grid-template-columns:34px minmax(0,1fr);grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:12px 14px;border-radius:12px;background:rgba(14,17,9,.72);border:1px solid rgba(233,199,131,.32);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .3s,border-color .3s}
+.farm li{border-radius:12px;background:rgba(14,17,9,.72);border:1px solid rgba(233,199,131,.32);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .3s,border-color .3s}
 .farm li:hover{transform:translateY(-2px);border-color:#E9C783}
 .farm svg{grid-row:1 / span 2;width:34px;height:34px;padding:6px;border-radius:50%;background:rgba(233,199,131,.14);fill:none;stroke:#E9C783;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .farm b{font-size:15px;font-weight:700;color:#FBF6EC;line-height:1.2}
@@ -471,6 +501,18 @@ footer p{margin:0}
   <a class="d-tel" href="tel:+393331233806" aria-label="Chiamaci, 333 123 3806"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5h2.6l1.4 4.3-2 1.3a11.6 11.6 0 0 0 6.3 6.3l1.3-2 4.3 1.4v2.6a2 2 0 0 1-2.2 2A16.3 16.3 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Chiama</span></a>
   <a class="d-mail" href="mailto:info@agriturismopontecalatrasi.com" aria-label="Scrivici una email a info@agriturismopontecalatrasi.com"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.2" y="5.5" width="17.6" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Email</span></a>
 </nav>
+<dialog class="farm-pop" id="farmPop" aria-labelledby="fpTitle">
+  <div class="fp-in">
+    <button class="fp-x" type="button" aria-label="Chiudi"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="fp-ico" id="fpIco" aria-hidden="true"></div>
+    <p class="fp-kick">Dalla nostra terra</p>
+    <h3 id="fpTitle">L'olio della casa</h3>
+    <p class="fp-text" id="fpText"></p>
+    <p class="fp-lbl">Da provare</p>
+    <ul class="fp-tags" id="fpTags"></ul>
+    <div class="fp-nav"><button type="button" class="fp-prev" aria-label="Precedente">←</button><span id="fpCount">1 / 6</span><button type="button" class="fp-next" aria-label="Successivo">→</button></div>
+  </div>
+</dialog>
 <main>
   <!-- 1. si entra dal portone -->
   <section class="gate" id="portone" data-time="06:30" data-label="Alba" data-bg="#27301F" data-night>
@@ -534,7 +576,7 @@ footer p{margin:0}
         <p class="eyebrow"><b>10:30</b> La terra</p>
         <h2 class="split-line" style="max-width:12ch">Quello che arriva in tavola <em>nasce qui</em></h2>
         <p class="lead">Coltiviamo ulivi, vigna, grano, orzo e il foraggio per le nostre mucche. Dalla stalla e dal caseificio arrivano ricotta e formaggi, dall'orto le verdure di stagione, dal pollaio le uova. Quello che non produciamo lo prendiamo dai vicini: legumi, meloni, miele e salumi.</p>
-        <ul class="farm"><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c3-6 6-9 12-13" /><path d="M10 13c-2-.5-3.5-2-4-4 2 0 3.6 1.5 4 4Z"/><path d="M14 9.5c-.2-2 .8-3.8 2.6-4.8.3 2-.8 3.8-2.6 4.8Z"/><ellipse cx="16.5" cy="13" rx="1.6" ry="2.2" transform="rotate(30 16.5 13)"/></svg><b>Ulivi</b><span>olio Nocellara</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c0 2 1 3 3 3"/><circle cx="9" cy="10" r="2"/><circle cx="13" cy="10" r="2"/><circle cx="11" cy="13.5" r="2"/><circle cx="7" cy="13.5" r="2"/><circle cx="15" cy="13.5" r="2"/><circle cx="9" cy="17" r="2"/><circle cx="13" cy="17" r="2"/></svg><b>Vigna</b><span>vino della casa</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V8"/><path d="M12 8c-2-1-3-3-3-5 2 0 3 2 3 5Zm0 0c2-1 3-3 3-5-2 0-3 2-3 5Z"/><path d="M12 13c-2-1-3.5-2.5-3.5-4.5 2 .3 3.3 2 3.5 4.5Zm0 0c2-1 3.5-2.5 3.5-4.5-2 .3-3.3 2-3.5 4.5Z"/><path d="M12 18c-2-1-3.5-2.5-3.5-4.5 2 .3 3.3 2 3.5 4.5Zm0 0c2-1 3.5-2.5 3.5-4.5-2 .3-3.3 2-3.5 4.5Z"/></svg><b>Grano e orzo</b><span>pane e pasta</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 15.5 12 6l8.5 9.5Z"/><path d="M3.5 15.5V19h17v-3.5"/><circle cx="9" cy="17.2" r=".9"/><circle cx="14.5" cy="12.5" r="1"/><circle cx="16" cy="17" r=".8"/></svg><b>Caseificio</b><span>ricotta e formaggi</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-7"/><path d="M12 13C12 9 9 7 5 7c0 4 3 6 7 6Z"/><path d="M12 11c0-4 3-6 7-6 0 4-3 6-7 6Z"/><path d="M5 20h14"/></svg><b>Orto</b><span>verdure di stagione</span></li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c3.3 0 6 5 6 9.5a6 6 0 0 1-12 0c0-4.5 2.7-9.5 6-9.5Z"/></svg><b>Uova</b><span>del nostro pollaio</span></li></ul>
+        <ul class="farm"><li><button type="button" class="farm-btn" data-farm="Ulivi" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c3-6 6-9 12-13" /><path d="M10 13c-2-.5-3.5-2-4-4 2 0 3.6 1.5 4 4Z"/><path d="M14 9.5c-.2-2 .8-3.8 2.6-4.8.3 2-.8 3.8-2.6 4.8Z"/><ellipse cx="16.5" cy="13" rx="1.6" ry="2.2" transform="rotate(30 16.5 13)"/></svg><b>Ulivi</b><span>olio Nocellara</span></button></li><li><button type="button" class="farm-btn" data-farm="Vigna" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4c0 2 1 3 3 3"/><circle cx="9" cy="10" r="2"/><circle cx="13" cy="10" r="2"/><circle cx="11" cy="13.5" r="2"/><circle cx="7" cy="13.5" r="2"/><circle cx="15" cy="13.5" r="2"/><circle cx="9" cy="17" r="2"/><circle cx="13" cy="17" r="2"/></svg><b>Vigna</b><span>vino della casa</span></button></li><li><button type="button" class="farm-btn" data-farm="Grano e orzo" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21V8"/><path d="M12 8c-2-1-3-3-3-5 2 0 3 2 3 5Zm0 0c2-1 3-3 3-5-2 0-3 2-3 5Z"/><path d="M12 13c-2-1-3.5-2.5-3.5-4.5 2 .3 3.3 2 3.5 4.5Zm0 0c2-1 3.5-2.5 3.5-4.5-2 .3-3.3 2-3.5 4.5Z"/><path d="M12 18c-2-1-3.5-2.5-3.5-4.5 2 .3 3.3 2 3.5 4.5Zm0 0c2-1 3.5-2.5 3.5-4.5-2 .3-3.3 2-3.5 4.5Z"/></svg><b>Grano e orzo</b><span>i nostri campi</span></button></li><li><button type="button" class="farm-btn" data-farm="Caseificio" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 15.5 12 6l8.5 9.5Z"/><path d="M3.5 15.5V19h17v-3.5"/><circle cx="9" cy="17.2" r=".9"/><circle cx="14.5" cy="12.5" r="1"/><circle cx="16" cy="17" r=".8"/></svg><b>Caseificio</b><span>ricotta e formaggi</span></button></li><li><button type="button" class="farm-btn" data-farm="Orto" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20v-7"/><path d="M12 13C12 9 9 7 5 7c0 4 3 6 7 6Z"/><path d="M12 11c0-4 3-6 7-6 0 4-3 6-7 6Z"/><path d="M5 20h14"/></svg><b>Orto</b><span>verdure di stagione</span></button></li><li><button type="button" class="farm-btn" data-farm="Uova" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5c3.3 0 6 5 6 9.5a6 6 0 0 1-12 0c0-4.5 2.7-9.5 6-9.5Z"/></svg><b>Uova</b><span>del nostro pollaio</span></button></li></ul>
         <p class="quote">Ogni piatto si chiude con il nostro olio extravergine di Nocellara del Belice.</p>
       </div>
     </div>
@@ -902,6 +944,28 @@ if (hasGsap && !reduce){
 }
 
 
+
+
+/* ---------- popup della terra ---------- */
+(function(){
+  var dlg = document.getElementById('farmPop'); if (!dlg || !dlg.showModal) return;
+  var DATA = {"Ulivi":{"t":"L'olio della casa","x":"Dai nostri ulivi viene l'olio extravergine di Nocellara del Belice, la varietà tipica di questa valle. In cucina lo usiamo per chiudere ogni piatto.","d":["A crudo su ogni piatto","Antipasti di stagione"]},"Vigna":{"t":"La vigna","x":"Intorno alla masseria coltiviamo anche la vigna. Il vino arriva in tavola insieme ai piatti, come i prodotti dei nostri campi.","d":["A pranzo e a cena"]},"Grano e orzo":{"t":"I campi","x":"Sulle colline intorno alla masseria coltiviamo grano, orzo e il foraggio che serve alle nostre mucche.","d":["Caserecce e ruvidelli fatti in casa"]},"Caseificio":{"t":"Il caseificio","x":"Dalla stalla al caseificio: con il latte delle nostre mucche facciamo la ricotta fresca e i formaggi. Gli ospiti possono visitare la stalla e il caseificio.","d":["Cassatelle con la nostra ricotta","Formaggi a centro tavola"]},"Orto":{"t":"L'orto","x":"L'orto segue le stagioni e decide gli antipasti del giorno. Quello che manca lo prendiamo dai produttori della zona.","d":["Antipasti di stagione","Caponata"]},"Uova":{"t":"Il pollaio","x":"Anche le uova arrivano dalla fattoria, insieme alle verdure, ai formaggi e alla carne.","d":["Pasta fresca fatta in casa"]}};
+  var btns = [].slice.call(document.querySelectorAll('.farm-btn')), cur = 0;
+  function show(i){
+    cur = (i + btns.length) % btns.length; var b = btns[cur], k = b.dataset.farm, d = DATA[k];
+    document.getElementById('fpIco').innerHTML = b.querySelector('svg').outerHTML;
+    document.getElementById('fpTitle').textContent = d.t;
+    document.getElementById('fpText').textContent = d.x;
+    document.getElementById('fpTags').innerHTML = d.d.map(function(t){ return '<li>' + t + '</li>'; }).join('');
+    document.getElementById('fpCount').textContent = (cur + 1) + ' / ' + btns.length;
+  }
+  btns.forEach(function(b, i){ b.addEventListener('click', function(){ show(i); if (lenis) lenis.stop(); dlg.showModal(); }); });
+  dlg.querySelector('.fp-x').addEventListener('click', function(){ dlg.close(); });
+  dlg.querySelector('.fp-prev').addEventListener('click', function(){ show(cur - 1); });
+  dlg.querySelector('.fp-next').addEventListener('click', function(){ show(cur + 1); });
+  dlg.addEventListener('click', function(e){ if (e.target === dlg) dlg.close(); });
+  dlg.addEventListener('close', function(){ if (lenis) lenis.start(); btns[cur].focus({ preventScroll: true }); });
+})();
 
 /* ---------- pulviscolo dorato sul muro ---------- */
 (function(){
