@@ -518,20 +518,23 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 .ev-cap small{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E9C783}
 .ev-cap h3{margin:6px 0 6px;font-size:clamp(30px,3vw,44px);color:#F7F1E6}
 .ev-cap p{margin:0;font-family:var(--font-text);font-size:18px;line-height:1.5;color:#D9D1BF}
-.ev-pin .ev-a{order:1}.ev-pin .ev-cap-a{order:2}.ev-pin .ev-b{order:3}.ev-pin .ev-cap-b{order:4}
+.ev-pin .ev-a{order:1}.ev-pin .ev-cap-a{order:2}.ev-pin .ev-b{order:3}.ev-pin .ev-cap-b{order:4}.ev-pin .ev-c{order:5}.ev-pin .ev-cap-c{order:6}
 @supports (animation-timeline: view()){
-  .ev-stage{height:260vh;view-timeline:--ev block}
+  .ev-stage{height:360vh;view-timeline:--ev block}
   .ev-pin{position:sticky;top:0;display:block;width:100%;height:100vh;overflow:hidden}
   .ev-pin figure{position:absolute;inset:0;border-radius:0;aspect-ratio:auto}
   .ev-pin::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(180deg,#1E2A40 0,rgba(30,42,64,0) 16%,rgba(30,42,64,0) 55%,rgba(12,16,26,.82) 100%)}
-  .ev-a img{animation:evZoom linear both;animation-timeline:--ev;animation-range:contain 0% contain 55%}
-  .ev-b{transform:translate3d(100%,0,0);animation:evIn linear both;animation-timeline:--ev;animation-range:contain 30% contain 68%}
-  .ev-b-in{transform:translate3d(-100%,0,0);animation:evInR linear both;animation-timeline:--ev;animation-range:contain 30% contain 68%}
+  .ev-a img{animation:evZoom linear both;animation-timeline:--ev;animation-range:contain 0% contain 42%}
+  .ev-b{transform:translate3d(100%,0,0);animation:evIn linear both;animation-timeline:--ev;animation-range:contain 20% contain 46%}
+  .ev-b-in{transform:translate3d(-100%,0,0);animation:evInR linear both;animation-timeline:--ev;animation-range:contain 20% contain 46%}
+  .ev-c,.ev-c .ev-b-in{animation-range:contain 58% contain 84%}
   .ev-b::before{content:"";position:absolute;left:0;top:0;bottom:0;z-index:3;width:3px;background:#E9C783;box-shadow:0 0 30px rgba(233,199,131,.8)}
-  .ev-b img{animation:evZoom2 linear both;animation-timeline:--ev;animation-range:contain 30% contain 100%}
+  .ev-b img{animation:evZoom2 linear both;animation-timeline:--ev;animation-range:contain 20% contain 70%}
+  .ev-c img{animation-range:contain 58% contain 100%}
   .ev-cap{position:absolute;z-index:3;left:clamp(20px,5vw,64px);bottom:clamp(40px,9vh,90px);margin:0;padding:0}
-  .ev-cap-a{animation:evCapOut linear both;animation-timeline:--ev;animation-range:contain 26% contain 40%}
-  .ev-cap-b{opacity:0;animation:evCapIn linear both;animation-timeline:--ev;animation-range:contain 60% contain 74%}
+  .ev-cap-a{animation:evCapOut linear both;animation-timeline:--ev;animation-range:contain 16% contain 26%}
+  .ev-cap-b{opacity:0;animation:evCapInOut linear both;animation-timeline:--ev;animation-range:contain 40% contain 66%}
+  .ev-cap-c{opacity:0;animation:evCapIn linear both;animation-timeline:--ev;animation-range:contain 78% contain 90%}
   .ev-cap h3{font-size:clamp(40px,5vw,76px);text-shadow:0 4px 30px rgba(0,0,0,.5)}
   .ev-cap p{max-width:30rem;text-shadow:0 2px 14px rgba(0,0,0,.6);color:#EAE2D0}
 }
@@ -540,6 +543,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 @keyframes evIn{to{transform:translate3d(0,0,0)}}
 @keyframes evInR{to{transform:translate3d(0,0,0)}}
 @keyframes evCapOut{to{opacity:0;transform:translate3d(0,-24px,0)}}
+@keyframes evCapInOut{0%{opacity:0;transform:translate3d(0,24px,0)}30%,70%{opacity:1;transform:none}100%{opacity:0;transform:translate3d(0,-24px,0)}}
 @keyframes evCapIn{from{opacity:0;transform:translate3d(0,24px,0)}to{opacity:1;transform:none}}
 .ev-facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:clamp(40px,6vh,70px) 0 0;padding:0;list-style:none;border-top:1px solid rgba(233,199,131,.25)}
 .ev-facts li{padding:24px 22px 0 0;margin-right:22px;border-right:1px solid rgba(233,199,131,.16)}
@@ -562,7 +566,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 }
 @media (max-width:700px){
   .ev-num b{font-size:84px}
-  .ev-stage{height:220vh}
+  .ev-stage{height:300vh}
   .ev-cap h3{font-size:40px}
   .ev-cap p{font-size:16.5px}
 }
@@ -631,6 +635,9 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
   .cm-ticks svg{width:24px;height:24px;flex:none}
   .cm-nums b{font-size:34px}
 }
+.ct-sign{margin:30px 0 0;max-width:560px}
+.ct-sign img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:16px;box-shadow:0 20px 44px rgba(0,0,0,.3)}
+.ct-sign figcaption{margin-top:12px;font-size:14px;line-height:1.5;color:#CFC6B2}
 /* capodanno */
 .nye{position:relative;color:#F2EADB}
 .nye-hero{position:relative;height:130vh;overflow:hidden}
@@ -1174,7 +1181,7 @@ footer p{margin:0}
           <button type="button" class="pin" data-k="ingresso" style="left:61%;top:90%" aria-label="L'ingresso"><span class="pin-in"><i></i><em>Ingresso</em></span></button>
         </div>
         <article class="tn-card" id="tnCard" aria-live="polite">
-          <img id="tnImg" src="assets/baglio-640.webp" alt="" width="640" height="853" loading="lazy" decoding="async">
+          <img id="tnImg" src="assets/cortile-ulivo-800.webp" alt="" width="640" height="853" loading="lazy" decoding="async">
           <div><h3 id="tnTitle">Il casale</h3><p id="tnText"></p><a id="tnLink" href="#masseria">Scopri di più →</a></div>
         </article>
       </div>
@@ -1199,10 +1206,12 @@ footer p{margin:0}
     </div>
     <div class="ev-stage" id="evStage">
       <div class="ev-pin">
-        <figure class="ev-a"><img src="assets/banchetto-1080.webp" srcset="assets/banchetto-640.webp 640w, assets/banchetto-1080.webp 1080w, assets/banchetto.jpg 1536w" sizes="100vw" loading="lazy" decoding="async" alt="Un banchetto nel baglio di sera, con i tavoli rotondi intorno all'ulivo"></figure>
+        <figure class="ev-a"><img src="assets/cortile-tavoli-1400.webp" srcset="assets/cortile-tavoli-800.webp 800w, assets/cortile-tavoli-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" alt="Il cortile in pietra con i tavoli rotondi apparecchiati, l'ulivo e il portone sulla campagna"></figure>
         <figure class="ev-b"><div class="ev-b-in"><img src="assets/piscina-eventi-1280.webp" srcset="assets/piscina-eventi-768.webp 768w, assets/piscina-eventi-1280.webp 1280w, assets/piscina-eventi-1920.webp 1920w, assets/piscina-eventi-2560.webp 2560w" sizes="100vw" loading="lazy" decoding="async" alt="La piscina illuminata al tramonto, con i tavoli apparecchiati per una festa"></div></figure>
-        <div class="ev-cap ev-cap-a"><small>01 · Di sera</small><h3>Il baglio</h3><p>Il cortile in pietra intorno all'ulivo, per i banchetti all'aperto sotto le luci.</p></div>
+        <figure class="ev-b ev-c"><div class="ev-b-in"><img src="assets/banchetto-1080.webp" srcset="assets/banchetto-640.webp 640w, assets/banchetto-1080.webp 1080w, assets/banchetto.jpg 1536w" sizes="100vw" loading="lazy" decoding="async" alt="Un banchetto nel baglio di sera, con i tavoli rotondi intorno all'ulivo"></div></figure>
+        <div class="ev-cap ev-cap-a"><small>01 · Di giorno</small><h3>Il cortile</h3><p>I tavoli apparecchiati sulla pietra, con il portone aperto sulla campagna.</p></div>
         <div class="ev-cap ev-cap-b"><small>02 · Al tramonto</small><h3>La piscina</h3><p>Tra le palme, per una cena con tutti gli ospiti mentre scende il sole.</p></div>
+        <div class="ev-cap ev-cap-c"><small>03 · Di sera</small><h3>Il baglio</h3><p>Il banchetto intorno all'ulivo, sotto le luci.</p></div>
       </div>
     </div>
     <div class="wrap">
@@ -1313,6 +1322,7 @@ footer p{margin:0}
           <div><dt>Come arrivare</dt><dd>Dallo scorrimento veloce Palermo–Sciacca prendete l'uscita Camporeale–Roccamena–Corleone al km 43; dopo il cavalcavia seguite le indicazioni per l'azienda. <a href="https://www.google.com/maps/search/?api=1&amp;query=Agriturismo%20Ponte%20Calatrasi%20Roccamena">Apri in Google Maps</a></dd></div>
           <div><dt>Orari</dt><dd>Da martedì a domenica. È gradita la prenotazione.</dd></div>
         </dl>
+        <figure class="ct-sign"><img src="assets/insegna-800.webp" srcset="assets/insegna-800.webp 800w, assets/insegna-1400.webp 1400w" sizes="(max-width: 900px) 92vw, 560px" loading="lazy" decoding="async" alt="La facciata bianca con la scritta Agriturismo Ponte Calatrasi e il parcheggio davanti"><figcaption>Arrivati in masseria, ci riconoscete dalla scritta sulla facciata. Il parcheggio è proprio davanti.</figcaption></figure>
       </div>
       <form id="req" novalidate>
         <h3>Scriveteci</h3>
@@ -1658,10 +1668,10 @@ if (hasGsap && !reduce){
   var stage = document.getElementById('tnStage'); if (!stage) return;
   var plane = document.getElementById('tnPlane'), card = document.getElementById('tnCard');
   var D = {
-    casale: { t: 'Il casale', x: "Il baglio del XII secolo intorno al grande cortile: le due sale in pietra del ristorante e la cappella.", img: 'assets/baglio-640.webp', a: '#masseria', l: 'Scopri la masseria' },
+    casale: { t: 'Il casale', x: "Il baglio del XII secolo intorno al grande cortile: le due sale in pietra del ristorante e la cappella.", img: 'assets/cortile-ulivo-800.webp', a: '#masseria', l: 'Scopri la masseria' },
     alloggi: { t: 'Le camere', x: "Otto camere in stile rustico per 22 posti letto, a pochi passi dal ristorante. La colazione è compresa.", img: 'assets/camera-640.webp', a: '#camere', l: 'Vedi le camere' },
-    piscina: { t: 'La piscina', x: "La piscina panoramica in mezzo al verde, anche per una cena al tramonto durante le feste.", img: 'assets/piscina-eventi-768.webp', a: '#eventi', l: 'Feste ed eventi' },
-    ingresso: { t: "L'ingresso", x: "Si entra dal portone ad arco, sulla SS 624 Palermo-Sciacca, uscita al km 43+800.", img: 'assets/portone-768.webp', a: '#contatti', l: 'Come arrivare' }
+    piscina: { t: 'La piscina', x: "La piscina panoramica in mezzo al verde, anche per una cena al tramonto durante le feste.", img: 'assets/piscina-giorno-800.webp', a: '#eventi', l: 'Feste ed eventi' },
+    ingresso: { t: "L'ingresso", x: "Si entra dal portone ad arco, sulla SS 624 Palermo-Sciacca, uscita al km 43+800.", img: 'assets/insegna-800.webp', a: '#contatti', l: 'Come arrivare' }
   };
   var pins = [].slice.call(stage.querySelectorAll('.pin')), btns = [].slice.call(document.querySelectorAll('#tnList button'));
   function show(k, first){
