@@ -111,6 +111,22 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate .lead{color:#E2DCC8}
 .gate .btn-line{color:#F4ECDD}
 .gate .btn-line:hover{background:#F4ECDD;color:#27301F}
+.day{display:none;margin-top:26px;width:min(600px,100%)}
+.day-k span{color:#8E8B77}
+.day-k{margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#BDB8A3}
+.day ol{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin:0;padding:0;list-style:none}
+.day ol::before{content:"";position:absolute;left:4px;right:0;top:4px;height:1px;background:linear-gradient(90deg,#E9C783,rgba(233,199,131,.25) 70%,rgba(233,199,131,0))}
+.day li{position:relative}
+.day a,.day li.on{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-decoration:none;color:inherit;padding-bottom:4px}
+.day .dot{position:relative;width:9px;height:9px;border-radius:50%;background:#1F2718;border:1.5px solid rgba(233,199,131,.7);margin-bottom:6px;transition:background .25s,transform .25s}
+.day li.on .dot{background:#E9C783;border-color:#E9C783}
+.day li.on .dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1px solid #E9C783;animation:dayPulse 2.2s ease-out infinite}
+@keyframes dayPulse{from{transform:scale(.5);opacity:1}to{transform:scale(1.6);opacity:0}}
+.day b{font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:.06em;color:#E9C783;font-variant-numeric:tabular-nums}
+.day .dl{font-family:var(--font-display);font-style:italic;font-size:15.5px;line-height:1.15;color:#E2DCC8;transition:color .25s}
+.day a:hover .dot,.day a:focus-visible .dot{background:#E9C783;transform:scale(1.25)}
+.day a:hover .dl,.day a:focus-visible .dl{color:#fff}
+.day a:focus-visible{outline:none}
 .gate .hint{display:flex;align-items:center;gap:12px;margin-top:30px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#BDB8A3}
 .gate .hint i{width:1px;height:40px;background:linear-gradient(#BDB8A3,rgba(0,0,0,0));animation:drip 2s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
@@ -121,6 +137,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate-welcome h2{font-size:clamp(44px,6vw,96px);text-shadow:0 4px 40px rgba(0,0,0,.45)}
 
 
+@media (min-width:701px){.gate .hint,.gate .gate-facts{display:none}.day{display:block}}
 /* animazione iniziale: il portone si apre */
 #intro{position:fixed;inset:0;z-index:100;pointer-events:auto;cursor:pointer}
 #intro .door{position:absolute;top:0;bottom:0;width:50.5%;background:#222A1B;overflow:hidden;will-change:transform}
@@ -757,6 +774,18 @@ footer p{margin:0}
           <li><b>8 camere</b><span>22 posti letto</span></li>
         </ul>
         <p class="hint"><i></i>Scorri ed entra dal portone</p>
+        <nav class="day" id="day" aria-label="La giornata in masseria">
+          <p class="day-k">Una giornata in masseria <span>· scorri ed entra dal portone</span></p>
+          <ol>
+            <li class="on"><span class="dot"></span><b>06:30</b><span class="dl">Il portone</span></li>
+            <li><a href="#masseria"><span class="dot"></span><b>08:30</b><span class="dl">Masseria</span></a></li>
+            <li><a href="#terra"><span class="dot"></span><b>10:30</b><span class="dl">La terra</span></a></li>
+            <li><a href="#cucina"><span class="dot"></span><b>13:00</b><span class="dl">Cucina</span></a></li>
+            <li><a href="#camere"><span class="dot"></span><b>16:00</b><span class="dl">Camere</span></a></li>
+            <li><a href="#eventi"><span class="dot"></span><b>19:30</b><span class="dl">Eventi</span></a></li>
+            <li><a href="#capodanno"><span class="dot"></span><b>21:00</b><span class="dl">Capodanno</span></a></li>
+          </ol>
+        </nav>
       </div>
       <a class="gate-event" id="gateEvent" href="#capodanno">
         <span class="ge-date"><b>31</b>dic</span>
@@ -1147,7 +1176,7 @@ function drawWall(){
   wall.style.setProperty('--ox', cx + 'px'); wall.style.setProperty('--oy', (top + ah * 0.6) + 'px');
   if (ev){ ev.style.top = mobile ? '' : (bottom - 46) + 'px'; ev.style.left = mobile ? '' : (cx - ev.offsetWidth / 2) + 'px'; }
   var gA = document.getElementById('gpA'), gB = document.getElementById('gpB');
-  if (gA && gB){ gA.style.left = (arch.left - 80) + 'px'; gA.style.top = (bottom - 318) + 'px'; gB.style.left = (arch.right - 78) + 'px'; gB.style.top = (top + 34) + 'px'; }
+  if (gA && gB){ var tR = txt.getBoundingClientRect().right + 18, aL = Math.max(arch.left - 80, tR); gA.style.visibility = aL > arch.left + 30 ? 'hidden' : ''; gA.style.left = aL + 'px'; gA.style.top = (bottom - 318) + 'px'; gB.style.left = (arch.right - 78) + 'px'; gB.style.top = (top + 34) + 'px'; }
   var gl = document.getElementById('glowG');
   if (gl){ var gcy = top + ah * 0.5, grx = R2 * 2.1, gry = ah * 1.1;
     gl.setAttribute('cx', cx); gl.setAttribute('cy', gcy); gl.setAttribute('r', grx);
@@ -1160,6 +1189,26 @@ function drawWall(){
   if ((!window.gsap || reduce) && !GT) gi.style.transform = 'translate(' + arch.off + 'px,' + arch.offY + 'px) scale(1.18)';
 }
 drawWall();
+/* profondità col mouse: la foto nella finestra va indietro, le polaroid vengono avanti */
+(function(){
+  if (reduce || isTouch || !matchMedia('(hover: hover)').matches) return;
+  var L = [['.gate-breathe picture', -16], ['#gpA', 26], ['#gpB', 18], ['#gateEvent', 10], ['.gate-intro .txt', -5], ['#dust', 8]].map(function(a){ var el = document.querySelector(a[0]); if (el) el.style.willChange = 'translate'; return [el, a[1]]; }).filter(function(a){ return a[0]; });
+  var tx = 0, ty = 0, cx = 0, cy = 0, raf = 0;
+  function tick(){
+    var k = (window.scrollY || 0) < innerHeight * 0.12 ? 1 : 0, gx = tx * k, gy = ty * k;
+    cx += (gx - cx) * 0.075; cy += (gy - cy) * 0.075;
+    for (var i = 0; i < L.length; i++){ var d = L[i][1]; L[i][0].style.translate = (cx * d).toFixed(2) + 'px ' + (cy * d * 0.7).toFixed(2) + 'px'; }
+    raf = (Math.abs(gx - cx) > 0.002 || Math.abs(gy - cy) > 0.002) ? requestAnimationFrame(tick) : 0;
+  }
+  addEventListener('mousemove', function(e){ tx = e.clientX / innerWidth - 0.5; ty = e.clientY / innerHeight - 0.5; tx *= 2; ty *= 2; if (!raf) raf = requestAnimationFrame(tick); }, { passive: true });
+  addEventListener('scroll', function(){ if (!raf && (cx || cy)) raf = requestAnimationFrame(tick); }, { passive: true });
+})();
+document.querySelectorAll('#day a').forEach(function(a){
+  a.addEventListener('click', function(e){
+    var t = document.querySelector(a.getAttribute('href')); if (!t) return; e.preventDefault();
+    if (lenis) lenis.scrollTo(t, { duration: 1.8 }); else t.scrollIntoView({ behavior: 'smooth' });
+  });
+});
 if (GT){
   var gateEl = document.getElementById('portone'), gOpen = false;
   var gCheck = function(){ var y = window.scrollY || 0; if (!gOpen && y > 30){ gOpen = true; gateEl.classList.add('open'); } else if (gOpen && y < 6){ gOpen = false; gateEl.classList.remove('open'); } };
@@ -1344,7 +1393,7 @@ if (hasGsap && !reduce){
   var intro = document.getElementById('intro');
   var seen = false;
   try { seen = sessionStorage.getItem('pc-intro') === '1'; } catch (e) {}
-  var heroBits = '.gate-intro .eyebrow, .gate h1, .gate-intro .lead, .gate-intro .ctas, .gate-facts, .gate .hint, #gateEvent, .gp';
+  var heroBits = '.gate-intro .eyebrow, .gate h1, .gate-intro .lead, .gate-intro .ctas, .gate-facts, .gate .hint, .day, #gateEvent, .gp';
   if (reduce || seen || !hasGsap){ intro.remove(); return; }
   try { sessionStorage.setItem('pc-intro', '1'); } catch (e) {}
   if (lenis) lenis.stop();
