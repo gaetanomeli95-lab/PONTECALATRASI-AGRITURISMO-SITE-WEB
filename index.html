@@ -563,6 +563,28 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
   .ev-cap h3{font-size:40px}
   .ev-cap p{font-size:16.5px}
 }
+.bottega{overflow:hidden}
+.bt-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(30px,6vw,90px);align-items:center}
+.bt-ctas{margin-top:30px}
+.bottega .btn-line{color:#2A2216;border-color:rgba(42,34,22,.45)}
+.bottega .btn-line:hover{background:#2A2216;color:#F4ECDD}
+.bt-note{margin:16px 0 0;font-size:14px;color:#7A6E58}
+.bt-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.bt-card{position:relative;display:flex;flex-direction:column;gap:6px;padding:22px 22px 26px;border-radius:20px;background:#FBF5E8;box-shadow:0 18px 40px rgba(90,60,20,.16);outline:1px solid rgba(176,138,74,.45);outline-offset:-8px;transition:transform .35s ease}
+.bt-card:hover{transform:translateY(-6px) rotate(-.6deg)}
+.bt-formaggi{margin-top:48px;background:#FFF8E6}
+.bt-card svg{width:100%;height:auto;display:block}
+.bt-card small{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#8A6220}
+.bt-card h3{margin:4px 0 6px;font-size:clamp(30px,2.8vw,40px);color:#2A2216}
+.bt-card p{margin:0;font-family:var(--font-text);font-size:17px;line-height:1.45;color:#5A5343}
+@media (max-width:900px){
+  .bt-grid{grid-template-columns:minmax(0,1fr)}
+  .bt-cards{gap:12px}
+  .bt-formaggi{margin-top:30px}
+  .bt-card{padding:14px 14px 18px;border-radius:16px;outline-offset:-6px}
+  .bt-card h3{font-size:26px}
+  .bt-card p{font-size:15.5px}
+}
 /* capodanno */
 .nye{position:relative;color:#F2EADB}
 .nye-hero{position:relative;height:130vh;overflow:hidden}
@@ -609,7 +631,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 .nye .btn-line:hover{background:#F2EADB;color:var(--night)}
 
 /* menu del cenone, impaginato come un menu stampato */
-.menu-card{position:relative;background:radial-gradient(ellipse 90% 70% at 50% 0%,#FBF5E9,#F3E9D5);color:#1F1C16;border-radius:18px;padding:clamp(34px,5vw,72px) clamp(22px,5vw,72px);box-shadow:0 40px 100px rgba(0,0,0,.5);outline:1px solid rgba(201,154,69,.7);outline-offset:-14px}
+.menu-card{position:relative;background:linear-gradient(180deg,#FAF3E5,#F3E9D5 40%);color:#1F1C16;border-radius:18px;padding:clamp(34px,5vw,72px) clamp(22px,5vw,72px);box-shadow:0 24px 50px rgba(0,0,0,.42);contain:layout paint;outline:1px solid rgba(201,154,69,.7);outline-offset:-14px}
 .mc-corner{position:absolute;width:44px;height:44px;border:2px solid #C99A45;pointer-events:none}
 .mc-corner.tl{top:22px;left:22px;border-right:0;border-bottom:0;border-top-left-radius:10px}
 .mc-corner.tr{top:22px;right:22px;border-left:0;border-bottom:0;border-top-right-radius:10px}
@@ -1034,6 +1056,48 @@ footer p{margin:0}
     </div>
   </section>
 
+  <!-- 4b. la bottega -->
+  <section class="chapter bottega" id="bottega" data-time="15:00" data-label="Bottega" data-bg="#F1E4C8">
+    <div class="wrap bt-grid">
+      <div class="bt-text">
+        <p class="eyebrow"><b>15:00</b> La bottega</p>
+        <h2 class="split-line">Da portare <em>a casa</em></h2>
+        <p class="lead">Con il latte delle nostre mucche facciamo la ricotta fresca e i formaggi. Non si assaggiano solo a tavola: si possono comprare direttamente qui in masseria.</p>
+        <div class="ctas bt-ctas">
+          <a class="btn btn-gold" href="https://wa.me/393331233806?text=Ciao%2C%20vorrei%20sapere%20che%20ricotta%20e%20formaggi%20avete%20in%20questi%20giorni" target="_blank" rel="noopener">Chiedi cosa c'è oggi</a>
+          <a class="btn btn-line bt-call" href="tel:+393331233806">Chiama</a>
+        </div>
+        <p class="bt-note">La disponibilità cambia con la produzione: scriveteci prima di passare.</p>
+      </div>
+      <div class="bt-cards">
+        <article class="bt-card bt-ricotta">
+          <svg viewBox="0 0 220 170" aria-hidden="true">
+            <ellipse cx="110" cy="150" rx="82" ry="10" fill="#000" opacity=".12"/>
+            <path d="M44 92h132l-14 52c-2 7-8 11-15 11H73c-7 0-13-4-15-11z" fill="#C7A15E"/>
+            <path d="M52 100h116M55 112h110M58 124h104M61 136h98" stroke="#A9823F" stroke-width="2.5"/>
+            <path d="M62 92l6 60M82 92l3 62M102 92l1 63M122 92l-1 63M142 92l-3 62M160 92l-6 60" stroke="#A9823F" stroke-width="2"/>
+            <path d="M40 94c0-40 31-62 70-62s70 22 70 62c-20 6-45 9-70 9s-50-3-70-9z" fill="#FBF7EE"/>
+            <path d="M62 62c10-12 26-18 44-18" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".9"/>
+            <path d="M48 90c20 5 40 7 62 7s44-2 62-7" stroke="#E7DCC6" stroke-width="3" fill="none"/>
+          </svg>
+          <div><small>Fresca</small><h3>Ricotta</h3><p>Con il latte della nostra stalla, nella sua fiscella.</p></div>
+        </article>
+        <article class="bt-card bt-formaggi">
+          <svg viewBox="0 0 220 170" aria-hidden="true">
+            <ellipse cx="110" cy="150" rx="86" ry="10" fill="#000" opacity=".12"/>
+            <path d="M30 78c0-14 36-24 80-24s80 10 80 24v52c0 14-36 24-80 24s-80-10-80-24z" fill="#D9A94A"/>
+            <ellipse cx="110" cy="78" rx="80" ry="24" fill="#F2D488"/>
+            <path d="M34 96c10 9 40 15 76 15s66-6 76-15M34 114c10 9 40 15 76 15s66-6 76-15" stroke="#B98632" stroke-width="2" fill="none" opacity=".7"/>
+            <path d="M110 78l70-6c4 14 4 30 0 44l-70-8z" fill="#F7E2A6"/>
+            <path d="M110 78l70-6v0" stroke="#B98632" stroke-width="2"/>
+            <path d="M70 66l6 6M92 60l5 5M140 64l5 5M58 84l6 5" stroke="#C99A45" stroke-width="2.5" stroke-linecap="round" opacity=".6"/>
+          </svg>
+          <div><small>Del nostro caseificio</small><h3>Formaggi</h3><p>Gli stessi che portiamo a centro tavola, da gustare anche a casa.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- 5. camere -->
   <section class="chapter feature rev" id="camere" data-time="16:00" data-label="Pomeriggio" data-bg="#E1E7D4">
     <div class="feature-grid">
@@ -1325,7 +1389,7 @@ function setChapter(sec){
   topbar.classList.toggle('is-night', sec.hasAttribute('data-night'));
   var hm = sec.dataset.time.split(':').map(Number);
   $('#cT').textContent = sec.dataset.time; $('#cL').textContent = sec.dataset.label;
-  var map = { masseria: 'masseria', ponte: 'masseria', terra: 'masseria', cucina: 'cucina', camere: 'camere', tenuta: 'camere', eventi: 'eventi', capodanno: 'capodanno', mezzanotte: 'capodanno', contatti: 'contatti' };
+  var map = { masseria: 'masseria', ponte: 'masseria', terra: 'masseria', cucina: 'cucina', bottega: 'cucina', camere: 'camere', tenuta: 'camere', eventi: 'eventi', capodanno: 'capodanno', mezzanotte: 'capodanno', contatti: 'contatti' };
   document.querySelectorAll('.nl').forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + map[sec.id]); });
   $('#hH').style.transform = 'rotate(' + ((hm[0] % 12) * 30 + hm[1] * 0.5) + 'deg)';
   $('#hM').style.transform = 'rotate(' + (hm[1] * 6) + 'deg)';
@@ -1490,7 +1554,7 @@ if (hasGsap && !reduce){
   // testi e liste
   gsap.utils.toArray('.lead, .facts, .ticks, .farm, .quote, .note, .ctas, .course, .mc-midnight, .mc-foot, .party li, .info, form').forEach(function(el){
     if (el.closest('.gate')) return;
-    if (isTouch && el.closest('.nye-body')) return;
+    if (el.closest('.nye-body')) return;
     gsap.from(el, { y: 30, opacity: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
   });
   // striscia che scorre con lo scroll
@@ -1626,7 +1690,7 @@ if (hasGsap && !reduce){
 /* ---------- popup della terra ---------- */
 (function(){
   var dlg = document.getElementById('farmPop'); if (!dlg || !dlg.showModal) return;
-  var DATA = {"Ulivi":{"t":"L'olio della casa","x":"Dai nostri ulivi viene l'olio extravergine di Nocellara del Belice, la varietà tipica di questa valle. In cucina lo usiamo per chiudere ogni piatto.","d":["A crudo su ogni piatto","Antipasti di stagione"]},"Vigna":{"t":"La vigna","x":"Intorno alla masseria coltiviamo anche la vigna. Il vino arriva in tavola insieme ai piatti, come i prodotti dei nostri campi.","d":["A pranzo e a cena"]},"Grano e orzo":{"t":"I campi","x":"Sulle colline intorno alla masseria coltiviamo grano, orzo e il foraggio che serve alle nostre mucche.","d":["Caserecce e ruvidelli fatti in casa"]},"Caseificio":{"t":"Il caseificio","x":"Dalla stalla al caseificio: con il latte delle nostre mucche facciamo la ricotta fresca e i formaggi. Gli ospiti possono visitare la stalla e il caseificio.","d":["Cassatelle con la nostra ricotta","Formaggi a centro tavola"]},"Orto":{"t":"L'orto","x":"L'orto segue le stagioni e decide gli antipasti del giorno. Quello che manca lo prendiamo dai produttori della zona.","d":["Antipasti di stagione","Caponata"]},"Uova":{"t":"Il pollaio","x":"Anche le uova arrivano dalla fattoria, insieme alle verdure, ai formaggi e alla carne.","d":["Pasta fresca fatta in casa"]}};
+  var DATA = {"Ulivi":{"t":"L'olio della casa","x":"Dai nostri ulivi viene l'olio extravergine di Nocellara del Belice, la varietà tipica di questa valle. In cucina lo usiamo per chiudere ogni piatto.","d":["A crudo su ogni piatto","Antipasti di stagione"]},"Vigna":{"t":"La vigna","x":"Intorno alla masseria coltiviamo anche la vigna. Il vino arriva in tavola insieme ai piatti, come i prodotti dei nostri campi.","d":["A pranzo e a cena"]},"Grano e orzo":{"t":"I campi","x":"Sulle colline intorno alla masseria coltiviamo grano, orzo e il foraggio che serve alle nostre mucche.","d":["Caserecce e ruvidelli fatti in casa"]},"Caseificio":{"t":"Il caseificio","x":"Dalla stalla al caseificio: con il latte delle nostre mucche facciamo la ricotta fresca e i formaggi. Gli ospiti possono visitare la stalla e il caseificio, e comprare ricotta e formaggi da portare a casa.","d":["Cassatelle con la nostra ricotta","Formaggi a centro tavola","Vendita in masseria"]},"Orto":{"t":"L'orto","x":"L'orto segue le stagioni e decide gli antipasti del giorno. Quello che manca lo prendiamo dai produttori della zona.","d":["Antipasti di stagione","Caponata"]},"Uova":{"t":"Il pollaio","x":"Anche le uova arrivano dalla fattoria, insieme alle verdure, ai formaggi e alla carne.","d":["Pasta fresca fatta in casa"]}};
   var btns = [].slice.call(document.querySelectorAll('.farm-btn')), cur = 0;
   function show(i){
     cur = (i + btns.length) % btns.length; var b = btns[cur], k = b.dataset.farm, d = DATA[k];
@@ -1722,7 +1786,7 @@ if (hasGsap && !reduce){
 
 /* ---------- fuochi d'artificio su canvas ---------- */
 function Fireworks(canvas){
-  var ctx = canvas.getContext('2d'), parts = [], rockets = [], dpr = Math.min(devicePixelRatio || 1, isTouch ? 1.5 : 1.25), W = 0, H = 0, on = false, raf = 0, last = 0, rate = 0, acc = 0;
+  var ctx = canvas.getContext('2d'), parts = [], rockets = [], dpr = Math.min(devicePixelRatio || 1, isTouch ? 1.5 : 1), W = 0, H = 0, on = false, raf = 0, last = 0, rate = 0, acc = 0;
   var word = null;
   var palette = ['#FFD27A', '#FFE7B0', '#FF9A4D', '#FFF6E8', '#F58B8B', '#C9DCFF', '#FFC0E0'];
   function size(){ var r = canvas.getBoundingClientRect(); W = r.width; H = r.height; canvas.width = W * dpr; canvas.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
@@ -1795,10 +1859,12 @@ function Fireworks(canvas){
   };
 }
 var fwHero = Fireworks($('#fwHero')), fwMid = Fireworks($('#fwMid'));
-function watch(el, fw, rate){
-  new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ fw.start(); if (rate) fw.setRate(rate); } else { fw.stop(); } }); }, { threshold: isTouch ? 0.35 : 0.05, rootMargin: '-18% 0px -18% 0px' }).observe(el);
+function watch(el, fw, rate, minR){
+  new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting && e.intersectionRatio >= (minR || 0)){ fw.start(); if (rate) fw.setRate(rate); } else { fw.stop(); } }); },
+    minR ? { threshold: [0, minR, minR + 0.05, 1] } : { threshold: isTouch ? 0.35 : 0.05, rootMargin: '-18% 0px -18% 0px' }).observe(el);
 }
-watch(isTouch ? $('.nye-hero img') : $('.nye-hero'), fwHero, isTouch ? 0.5 : 0.9);
+// i fuochi si fermano quando il menu prende metà schermo
+watch(isTouch ? $('.nye-hero img') : $('.nye-hero'), fwHero, isTouch ? 0.5 : 0.9, isTouch ? 0 : 0.42);
 watch($('#mezzanotte'), fwMid, 0);
 
 /* ---------- mezzanotte: il conto alla rovescia segue lo scroll ---------- */
