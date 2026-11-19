@@ -111,10 +111,10 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate .lead{color:#E2DCC8}
 .gate .btn-line{color:#F4ECDD}
 .gate .btn-line:hover{background:#F4ECDD;color:#27301F}
-.day{display:none;margin-top:26px;width:min(600px,100%)}
+.day{display:none;margin-top:26px;width:min(640px,100%)}
 .day-k span{color:#8E8B77}
 .day-k{margin:0 0 14px;font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#BDB8A3}
-.day ol{position:relative;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));margin:0;padding:0;list-style:none}
+.day ol{position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));margin:0;padding:0;list-style:none}
 .day ol::before{content:"";position:absolute;left:4px;right:0;top:4px;height:1px;background:linear-gradient(90deg,#E9C783,rgba(233,199,131,.25) 70%,rgba(233,199,131,0))}
 .day li{position:relative}
 .day a,.day li.on{display:flex;flex-direction:column;align-items:flex-start;gap:5px;text-decoration:none;color:inherit;padding-bottom:4px}
@@ -461,6 +461,34 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
   .pin-in i{width:28px;height:28px}
   .pin-in i::after{inset:6px}
   .pin-in em{font-size:10px;padding:3px 7px;margin-bottom:5px}
+}
+/* il ponte: la foto resta ferma, il racconto le scorre sopra */
+.ponte{position:relative;background:#3E4A2A;color:#F2EADB}
+.pt-media{position:sticky;top:0;height:100vh;overflow:hidden}
+.pt-media img{width:100%;height:100%;object-fit:cover;object-position:46% 50%}
+.pt-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#3E4A2A 0,rgba(62,74,42,0) 18%,rgba(62,74,42,0) 78%,#3E4A2A 100%),linear-gradient(90deg,rgba(12,16,8,.72) 0,rgba(12,16,8,.35) 40%,rgba(12,16,8,0) 62%)}
+.pt-body{position:relative;margin-top:-100vh;padding:26vh 0 34vh}
+.pt-card{width:min(500px,100%);margin:0 0 46vh;padding:30px 32px;border-radius:18px;background:rgba(18,22,12,.86);border:1px solid rgba(233,199,131,.3);box-shadow:0 30px 70px rgba(0,0,0,.35)}
+.pt-card:last-child{margin-bottom:0}
+.pt-head{background:none;border:0;box-shadow:none;padding:0;width:min(560px,100%);margin-bottom:50vh}
+.pt-head .eyebrow{color:#E9C783}
+.pt-head h2{color:#F7F1E6;text-shadow:0 4px 30px rgba(0,0,0,.45)}
+.pt-head h2 em{color:#E9C783}
+.pt-head .lead{color:#EDE5D3;text-shadow:0 2px 16px rgba(0,0,0,.5)}
+.pt-k{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#E9C783}
+.pt-card h3{font-size:clamp(28px,2.6vw,36px);line-height:1.1;color:#F7F1E6;margin:0 0 12px}
+.pt-card p{font-family:var(--font-text);font-size:18.5px;line-height:1.55;color:#DCD3BF;margin:0}
+.pt-card p.pt-k{font-family:var(--font-body);font-size:12px;line-height:1.3;color:#E9C783;margin-bottom:10px}
+.pt-facts{display:flex;gap:0;margin:22px 0 0;padding:16px 0 0;list-style:none;border-top:1px solid rgba(233,199,131,.25)}
+.pt-facts li{flex:1;font-size:13px;color:#BDB8A3;line-height:1.3}
+.pt-facts b{display:block;font-family:var(--font-display);font-weight:400;font-size:34px;line-height:1;color:#F4ECDD;margin-bottom:4px}
+@media (max-width:700px){
+  .pt-media img{object-position:44% 50%}
+  .pt-media::after{background:linear-gradient(180deg,#3E4A2A 0,rgba(62,74,42,0) 16%,rgba(62,74,42,0) 70%,#3E4A2A 100%),linear-gradient(0deg,rgba(12,16,8,.55),rgba(12,16,8,.1) 60%)}
+  .pt-body{padding:30vh 0 30vh}
+  .pt-card{padding:22px 20px;margin-bottom:55vh;background:rgba(18,22,12,.9)}
+  .pt-head{margin-bottom:60vh}
+  .pt-card p{font-size:17.5px}
 }
 /* capodanno */
 .nye{position:relative;color:#F2EADB}
@@ -825,6 +853,7 @@ footer p{margin:0}
           <ol>
             <li class="on"><span class="dot"></span><b>06:30</b><span class="dl">Il portone</span></li>
             <li><a href="#masseria"><span class="dot"></span><b>08:30</b><span class="dl">Masseria</span></a></li>
+            <li><a href="#ponte"><span class="dot"></span><b>09:30</b><span class="dl">Il ponte</span></a></li>
             <li><a href="#terra"><span class="dot"></span><b>10:30</b><span class="dl">La terra</span></a></li>
             <li><a href="#cucina"><span class="dot"></span><b>13:00</b><span class="dl">Cucina</span></a></li>
             <li><a href="#camere"><span class="dot"></span><b>16:00</b><span class="dl">Camere</span></a></li>
@@ -869,6 +898,34 @@ footer p{margin:0}
   </section>
 
   <div class="band" aria-hidden="true"><div class="row" id="band"><span>Ulivi</span><span>Vigna</span><span>Grano</span><span>Caseificio</span><span>Orto</span><span>Forno a legna</span><span>Ulivi</span><span>Vigna</span><span>Grano</span><span>Caseificio</span><span>Orto</span><span>Forno a legna</span></div></div>
+
+  <!-- 2b. il ponte -->
+  <section class="ponte" id="ponte" data-time="09:30" data-label="Il fiume" data-bg="#3E4A2A" data-night>
+    <div class="pt-media"><img src="assets/ponte-1080.webp" srcset="assets/ponte-720.webp 720w, assets/ponte-1080.webp 1080w, assets/ponte-1600.webp 1600w, assets/ponte-2400.webp 2400w" sizes="(max-aspect-ratio: 4/5) 180vh, 100vw" loading="lazy" decoding="async" alt="Il Ponte di Calatrasi: un'unica arcata di pietra a sesto acuto sul fiume Belice, tra le rocce e le colline"></div>
+    <div class="pt-body wrap">
+      <header class="pt-card pt-head">
+        <p class="eyebrow"><b>09:30</b> Il ponte</p>
+        <h2 class="split-line">Il ponte che <em>ci dà il nome</em></h2>
+        <p class="lead">Lungo il Belice, ai piedi del monte Maranfusa, c'è il ponte di pietra da cui prende il nome la nostra masseria. Qui tutti lo chiamano il Ponte del Diavolo.</p>
+      </header>
+      <article class="pt-card">
+        <p class="pt-k">La storia</p>
+        <h3>Quasi mille anni sul fiume</h3>
+        <p>La tradizione lo fa risalire al 1162, in epoca normanna, con forti influssi dell'architettura araba. Ha un'unica arcata a sesto acuto, una doppia ghiera di pietre e il profilo a schiena d'asino. Fino alla metà del Novecento la gente di Roccamena lo usava ancora per passare il fiume.</p>
+      </article>
+      <article class="pt-card">
+        <p class="pt-k">La leggenda</p>
+        <h3>Perché non ha parapetti</h3>
+        <p>Il ponte non ha protezioni ai lati. Si racconta che l'abbiano costruito in una sola notte le fate, o il diavolo, e che non abbiano voluto finirlo. Da allora, dicono, ogni riparo messo sui due lati è sempre crollato. Per questo lo chiamano Ponte del Diavolo.</p>
+      </article>
+      <article class="pt-card">
+        <p class="pt-k">Intorno</p>
+        <h3>Il mulino e il castello</h3>
+        <p>Vicino al ponte restano i ruderi del vecchio mulino di Calatrasi. Più in alto, sulla rocca del Maranfusa, ci sono i resti del castello di Calatrasi, citato già dal geografo arabo Idrisi. Chiedeteci come arrivarci: è la passeggiata giusta prima di pranzo.</p>
+        <ul class="pt-facts"><li><b>XII</b>secolo</li><li><b>1</b>sola arcata</li><li><b>0</b>parapetti</li></ul>
+      </article>
+    </div>
+  </section>
 
   <!-- 3. la terra -->
   <section class="full" id="terra" data-time="10:30" data-label="Mattina" data-bg="#3E4A2A" data-night>
@@ -1182,7 +1239,7 @@ function setChapter(sec){
   topbar.classList.toggle('is-night', sec.hasAttribute('data-night'));
   var hm = sec.dataset.time.split(':').map(Number);
   $('#cT').textContent = sec.dataset.time; $('#cL').textContent = sec.dataset.label;
-  var map = { masseria: 'masseria', terra: 'masseria', cucina: 'cucina', camere: 'camere', tenuta: 'camere', eventi: 'eventi', capodanno: 'capodanno', mezzanotte: 'capodanno', contatti: 'contatti' };
+  var map = { masseria: 'masseria', ponte: 'masseria', terra: 'masseria', cucina: 'cucina', camere: 'camere', tenuta: 'camere', eventi: 'eventi', capodanno: 'capodanno', mezzanotte: 'capodanno', contatti: 'contatti' };
   document.querySelectorAll('.nl').forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#' + map[sec.id]); });
   $('#hH').style.transform = 'rotate(' + ((hm[0] % 12) * 30 + hm[1] * 0.5) + 'deg)';
   $('#hM').style.transform = 'rotate(' + (hm[1] * 6) + 'deg)';
@@ -1206,7 +1263,7 @@ if (hasGsap){
 /* ---------- ogni sezione ha il suo colore, sfumato dalla precedente ---------- */
 (function(){
   var list = [].slice.call(document.querySelectorAll('main > [data-bg], main > .gate-wrap > [data-bg]'));
-  var own = { portone: 1, terra: 1, contatti: 1 };
+  var own = { portone: 1, ponte: 1, terra: 1, contatti: 1 };
   list.forEach(function(sec, i){
     if (own[sec.id]) return;
     var self = sec.dataset.bg, prev = i ? list[i - 1].dataset.bg : self;
