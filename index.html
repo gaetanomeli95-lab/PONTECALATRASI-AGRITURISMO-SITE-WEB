@@ -424,8 +424,17 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 .tn-list button:hover{transform:translateX(4px);border-color:rgba(176,138,74,.7)}
 .tn-list button.on{background:#2F3A22;color:#F4ECDD;border-color:#2F3A22}
 .tn-list button.on i{background:#E9C783;color:#1C150A}
-.tn-stage{position:relative;padding:0 0 120px}
-.tn-plane{position:relative;aspect-ratio:4/3;border-radius:18px;--rx:0deg;--rz:0deg}
+.tn-stage{position:relative;padding:0}
+.tn-plane{position:relative;aspect-ratio:16/9;border-radius:18px;--rx:0deg;--rz:0deg}
+.tn-vid{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:18px;pointer-events:none;transition:opacity .8s ease}
+.tn-plane.done .tn-vid,.tn-plane:not(.pre) .tn-vid{opacity:0}
+.pin{transition:opacity .5s ease,translate .6s cubic-bezier(.2,.8,.2,1)}
+.tn-plane.pre .pin{opacity:0;translate:0 -16px;pointer-events:none}
+.tn-plane .pin:nth-of-type(2){transition-delay:.12s}.tn-plane .pin:nth-of-type(3){transition-delay:.24s}.tn-plane .pin:nth-of-type(4){transition-delay:.36s}
+.tn-replay{position:absolute;left:14px;top:14px;z-index:3;padding:7px 14px 7px 30px;border:0;border-radius:999px;background:rgba(20,18,12,.62);color:#F7F1E6;font:700 12px/1 var(--font-body);letter-spacing:.08em;text-transform:uppercase;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .4s}
+.tn-replay::before{content:"";position:absolute;left:13px;top:50%;margin-top:-5px;border:5px solid transparent;border-left:8px solid #E9C783;border-right:0}
+.tn-plane.done .tn-replay{opacity:1;pointer-events:auto}
+.tn-replay:hover{background:rgba(20,18,12,.85)}
 .tn-img{position:relative;display:block;width:100%;height:100%;object-fit:cover;border-radius:18px;box-shadow:0 30px 70px rgba(40,28,12,.35)}
 .pin{position:absolute;z-index:2;width:0;height:0;padding:0;border:0;background:none;cursor:pointer}
 .pin-in{position:absolute;left:0;bottom:0;display:flex;flex-direction:column;align-items:center;transform:translateX(-50%)}
@@ -439,7 +448,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 .pin.on .pin-in i{background:#B86A3C;border-color:#fff;transform:rotate(-45deg) scale(1.15)}
 .pin:hover .pin-in i{transform:rotate(-45deg) scale(1.12)}
 .pin.on .pin-in em{background:#2F3A22;color:#F3D79A}
-.tn-card{position:absolute;left:4%;bottom:0;z-index:5;display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;width:min(470px,92%);padding:14px;border-radius:16px;background:#FBF6EC;color:#2A2216;box-shadow:0 24px 60px rgba(40,28,12,.3);outline:1px solid rgba(176,138,74,.45);outline-offset:-7px}
+.tn-card{position:relative;margin:18px 0 0 3%;z-index:5;display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;width:min(470px,92%);padding:14px;border-radius:16px;background:#FBF6EC;color:#2A2216;box-shadow:0 24px 60px rgba(40,28,12,.3);outline:1px solid rgba(176,138,74,.45);outline-offset:-7px}
 .tn-card img{width:120px;height:120px;object-fit:cover;border-radius:10px}
 .tn-card h3{margin:4px 0 6px;font-size:26px;line-height:1.1}
 .tn-card p{margin:0;font-family:var(--font-text);font-size:16.5px;line-height:1.45;color:#5A5343}
@@ -452,7 +461,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
   .tn-list{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tn-list button{font-size:18px;padding:10px 12px}
   .tn-stage{padding:0;margin-top:6px}
-  .tn-card{position:relative;left:auto;bottom:auto;width:100%;margin-top:34px;grid-template-columns:96px minmax(0,1fr)}
+  .tn-card{width:100%;margin:18px 0 0;grid-template-columns:96px minmax(0,1fr)}
   .tn-card img{width:96px;height:96px}
   .tn-card h3{font-size:22px}
   .pin-in i{width:28px;height:28px}
@@ -994,11 +1003,13 @@ footer p{margin:0}
       </div>
       <div class="tn-stage" id="tnStage">
         <div class="tn-plane" id="tnPlane">
-          <img class="tn-img" src="assets/tenuta-1400.webp" srcset="assets/tenuta-900.webp 900w, assets/tenuta-1400.webp 1400w, assets/tenuta-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 60vw" width="1448" height="1086" loading="lazy" decoding="async" alt="La tenuta vista dall'alto al tramonto: il casale a corte, la piscina tra le palme, le vigne e gli ulivi sulle colline">
-          <button type="button" class="pin" data-k="casale" style="left:45%;top:52%" aria-label="Il casale"><span class="pin-in"><i></i><em>Casale</em></span></button>
-          <button type="button" class="pin" data-k="alloggi" style="left:6%;top:79%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
-          <button type="button" class="pin" data-k="piscina" style="left:62.5%;top:31%" aria-label="La piscina"><span class="pin-in"><i></i><em>Piscina</em></span></button>
-          <button type="button" class="pin" data-k="ingresso" style="left:61%;top:80%" aria-label="L'ingresso"><span class="pin-in"><i></i><em>Ingresso</em></span></button>
+          <img class="tn-img" src="assets/tenuta-1400.webp" srcset="assets/tenuta-900.webp 900w, assets/tenuta-1400.webp 1400w, assets/tenuta-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 60vw" width="1448" height="814" loading="lazy" decoding="async" alt="La tenuta vista dall'alto al tramonto: il casale a corte, la piscina tra le palme, le vigne e gli ulivi sulle colline">
+          <video class="tn-vid" id="tnVid" muted playsinline preload="none" poster="assets/tenuta-volo-poster.webp" aria-hidden="true"></video>
+          <button type="button" class="tn-replay" id="tnReplay">Rivedi il volo</button>
+          <button type="button" class="pin" data-k="casale" style="left:45%;top:52.7%" aria-label="Il casale"><span class="pin-in"><i></i><em>Casale</em></span></button>
+          <button type="button" class="pin" data-k="alloggi" style="left:6%;top:88.7%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
+          <button type="button" class="pin" data-k="piscina" style="left:62.5%;top:24.7%" aria-label="La piscina"><span class="pin-in"><i></i><em>Piscina</em></span></button>
+          <button type="button" class="pin" data-k="ingresso" style="left:61%;top:90%" aria-label="L'ingresso"><span class="pin-in"><i></i><em>Ingresso</em></span></button>
         </div>
         <article class="tn-card" id="tnCard" aria-live="polite">
           <img id="tnImg" src="assets/baglio-640.webp" alt="" width="640" height="853" loading="lazy" decoding="async">
@@ -1491,6 +1502,27 @@ if (hasGsap && !reduce){
     if (lenis) lenis.scrollTo(t, { duration: 1.6 }); else t.scrollIntoView({ behavior: 'smooth' });
   });
   show('casale', true);
+  // il volo del drone: si allontana dal cortile fino alla vista intera, poi compaiono i punti
+  (function(){
+    var v = document.getElementById('tnVid'), rp = document.getElementById('tnReplay');
+    var slow = navigator.connection && navigator.connection.saveData;
+    if (!v || reduce || slow || !('IntersectionObserver' in window)){ if (v) v.remove(); if (rp) rp.remove(); return; }
+    plane.classList.add('pre');
+    var t = 0, started = false;
+    function finish(){ clearTimeout(t); plane.classList.remove('pre'); plane.classList.add('done'); }
+    function play(){
+      plane.classList.remove('done'); plane.classList.add('pre');
+      if (!v.src) v.src = innerWidth < 701 ? 'assets/tenuta-volo-854.mp4' : 'assets/tenuta-volo.mp4';
+      try { v.currentTime = 0; } catch (e) {}
+      var pr = v.play(); if (pr && pr.catch) pr.catch(finish);
+      clearTimeout(t); t = setTimeout(finish, 9000);
+    }
+    v.addEventListener('ended', finish);
+    v.addEventListener('error', finish);
+    pins.concat(btns).forEach(function(b){ b.addEventListener('click', function(){ if (plane.classList.contains('pre')){ try { v.pause(); } catch (e) {} finish(); } }); });
+    rp.addEventListener('click', play);
+    new IntersectionObserver(function(es, o){ es.forEach(function(e){ if (e.isIntersecting && !started){ started = true; o.disconnect(); play(); } }); }, { threshold: 0.55 }).observe(plane);
+  })();
 })();
 
 /* ---------- popup della terra ---------- */
