@@ -93,7 +93,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .menu-toggle{display:none;background:none;border:1px solid currentColor;color:var(--fg);border-radius:999px;min-height:44px;padding:0 16px;font:600 14px var(--font-body);letter-spacing:.08em;text-transform:uppercase}
 
 /* 1. il portone */
-.gate-wrap{position:relative;height:225vh;view-timeline:--gate block}
+.gate-wrap{position:relative;height:310vh;view-timeline:--gate block}
 .gate{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='44'%3E%3Cpath d='M0 .5H120M0 22.5H120M.5 0V22M60.5 22V44' fill='none' stroke='rgba(233,199,131,.07)'/%3E%3C/svg%3E"),radial-gradient(ellipse 80% 75% at 62% 45%,#34402A,#1F2718)}
 .gate-photo{position:absolute;inset:0}
 .gate-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform-origin:50% 50%}
@@ -114,8 +114,9 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .gate .hint{display:flex;align-items:center;gap:12px;margin-top:30px;font-size:13px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#BDB8A3}
 .gate .hint i{width:1px;height:40px;background:linear-gradient(#BDB8A3,rgba(0,0,0,0));animation:drip 2s ease-in-out infinite}
 @keyframes drip{0%{transform:scaleY(.2);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(.2);transform-origin:bottom}}
-.gate-fade{position:absolute;left:0;right:0;bottom:-1px;height:34vh;background:linear-gradient(180deg,rgba(244,237,225,0) 0%,rgba(244,237,225,.55) 55%,#F4EDE1 100%);opacity:0;pointer-events:none}
-.gate-welcome{position:absolute;left:0;right:0;bottom:24vh;text-align:center;color:#F7F1E6;opacity:0;padding:0 20px}
+.gate-fade{position:absolute;left:0;right:0;bottom:-1px;height:60vh;background:linear-gradient(180deg,rgba(12,10,6,0) 0%,rgba(12,10,6,.5) 100%);opacity:0;pointer-events:none}
+.gate-dim{position:absolute;inset:0;background:#0C0A06;opacity:0;pointer-events:none;will-change:opacity}
+.gate-welcome{position:absolute;left:0;right:0;top:34vh;text-align:center;color:#F7F1E6;opacity:0;padding:0 20px}
 .gate-welcome p{margin:0 0 10px;font-size:13px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:#F3D79A;text-shadow:0 1px 12px rgba(0,0,0,.6)}
 .gate-welcome h2{font-size:clamp(44px,6vw,96px);text-shadow:0 4px 40px rgba(0,0,0,.45)}
 
@@ -201,12 +202,14 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 }
 @keyframes navIn{to{opacity:1;transform:none}}
 
-#masseria{z-index:2;background:#F4EDE1;margin-top:-4px}
-#masseria::before{content:"";position:absolute;left:0;right:0;top:-60px;height:62px;background:linear-gradient(180deg,rgba(244,237,225,0),#F4EDE1);pointer-events:none}
+#masseria{background:#F4EDE1}
+
 
 
 /* sezioni con due foto: testo e foto fermi, la seconda foto sale come un sipario */
 .feature{padding:0}
+#masseria{z-index:3;margin-top:-100vh;border-radius:28px 28px 0 0;box-shadow:0 -24px 60px rgba(0,0,0,.28)}
+@media (max-width:700px){#masseria{border-radius:22px 22px 0 0}}
 .feature-grid{display:grid;grid-template-columns:minmax(0,1fr) 50vw;min-height:210vh}
 .feature.rev .feature-grid{grid-template-columns:50vw minmax(0,1fr)}
 .feature.rev .text{order:2}
@@ -235,9 +238,10 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 }
 
 
-@media (hover:none),(pointer:coarse){.gate-wrap{height:215vh}}
+@media (hover:none),(pointer:coarse){.gate-wrap{height:310vh}}
 /* telefono: il portone si apre a tempo, appena si inizia a scorrere (animazione del browser, non legata al dito) */
-html.gt .gate-wrap{height:118vh;view-timeline:none}
+html.gt .gate-wrap{height:218vh;view-timeline:--gate block}
+@supports (animation-timeline: view()){html.gt #gateDim{animation:gdim linear both;animation-timeline:--gate;animation-range:contain 15% contain 100%}}
 html.gt #wallP .wp{transition:transform 1s cubic-bezier(.65,0,.35,1);will-change:transform}
 html.gt #gateImg{transform:translate3d(var(--gx,0px),var(--gy,0px),0) scale(1.18);transition:transform 1.25s cubic-bezier(.55,0,.25,1)}
 html.gt .gate-intro{transition:opacity .45s ease,transform .6s ease;will-change:opacity,transform}
@@ -254,14 +258,17 @@ html.gt .gate.open #wall,html.gt .gate.open #dust{opacity:0}
 html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:opacity .6s ease .55s}
 /* il browser anima il portone da solo, fuori dal lavoro della pagina */
 @supports (animation-timeline: view()){
-  html.sda #wallP .wp{animation-timing-function:cubic-bezier(.45,0,.55,1);animation-fill-mode:both;animation-timeline:--gate;animation-range:contain 3% contain 72%}
+  html.sda #wallP .wp{animation-timing-function:cubic-bezier(.45,0,.55,1);animation-fill-mode:both;animation-timeline:--gate;animation-range:contain 2% contain 45%}
   html.sda #wallP .wp-l{animation-name:gwl}html.sda #wallP .wp-r{animation-name:gwr}html.sda #wallP .wp-t{animation-name:gwt}html.sda #wallP .wp-b{animation-name:gwb}
-  html.sda #gateImg{animation:gimg linear both;animation-timeline:--gate;animation-range:contain 0% contain 78%}
-  html.sda .gate-intro{animation:gout linear both;animation-timeline:--gate;animation-range:contain 0% contain 20%}
-  html.sda #wall{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 3% contain 26%}
-  html.sda #dust{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 0% contain 24%}
-  html.sda #gateFade{animation:gin linear both;animation-timeline:--gate;animation-range:contain 58% contain 84%}
-  html.sda #welcome{animation:gin linear both;animation-timeline:--gate;animation-range:contain 62% contain 86%}
+  html.sda #gateImg{animation:gimg linear both;animation-timeline:--gate;animation-range:contain 0% contain 50%}
+  html.sda .gate-intro{animation:gout linear both;animation-timeline:--gate;animation-range:contain 0% contain 13%}
+  html.sda #wall{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 2% contain 17%}
+  html.sda #dust{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 0% contain 15%}
+  html.sda #gateFade{animation:gin linear both;animation-timeline:--gate;animation-range:contain 36% contain 54%}
+  html.sda #welcome{animation:gin linear both;animation-timeline:--gate;animation-range:contain 40% contain 55%}
+  html.sda #gateDim{animation:gdim linear both;animation-timeline:--gate;animation-range:contain 54% contain 100%}
+  html.sda .gate-photo{animation:gsink linear both;animation-timeline:--gate;animation-range:contain 54% contain 100%}
+  html.sda #welcome h2,html.sda #welcome p{animation:gup linear both;animation-timeline:--gate;animation-range:contain 54% contain 100%}
 }
 @keyframes gwl{to{transform:translate3d(-101%,0,0)}}
 @keyframes gwr{to{transform:translate3d(101%,0,0)}}
@@ -271,6 +278,9 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 @keyframes gout{to{opacity:0;transform:translate3d(0,-40px,0)}}
 @keyframes gfade{to{opacity:0}}
 @keyframes gin{from{opacity:0}to{opacity:1}}
+@keyframes gdim{to{opacity:.55}}
+@keyframes gsink{to{transform:translate3d(0,-12vh,0)}}
+@keyframes gup{to{transform:translate3d(0,-14vh,0)}}
 
 /* capitoli */
 .chapter{position:relative;padding:clamp(110px,16vh,180px) 0}
@@ -644,7 +654,7 @@ footer p{margin:0}
   .gate h1{font-size:46px}
   .lead{font-size:19.5px}
   .gate .lead{font-size:17px}
-  .gate-welcome{bottom:20vh}
+  .gate-welcome{top:30vh}
 }
 /* telefono: la sezione del cenone si disegna una volta sola, niente sfumature pesanti da ridisegnare */
 @media (hover:none),(pointer:coarse){
@@ -739,6 +749,7 @@ footer p{margin:0}
       <p class="gate-side" aria-hidden="true">Valle del Belice · Sicilia</p>
     </div>
     <div class="gate-fade" id="gateFade" aria-hidden="true"></div>
+    <div class="gate-dim" id="gateDim" aria-hidden="true"></div>
     <div class="gate-welcome" id="welcome"><p>Roccamena · dal XII secolo</p><h2>Benvenuti in masseria</h2></div>
   </section>
   </div>
@@ -1171,7 +1182,10 @@ if (hasGsap && !reduce){
     .to('#wallP .wp-b', { yPercent: 101, duration: 1, ease: 'power2.inOut' }, 0.04)
     .fromTo('#gateImg', { x: function(){ return arch.off; }, y: function(){ return arch.offY; }, scale: 1.18 }, { x: 0, y: 0, scale: 1, duration: 1.05, ease: 'power1.in' }, 0)
     .to('#gateFade', { opacity: 1, duration: 0.3 }, 0.72)
-    .to('#welcome', { opacity: 1, duration: 0.25 }, 0.78);
+    .to('#welcome', { opacity: 1, duration: 0.25 }, 0.78)
+    .to('#gateDim', { opacity: 0.55, duration: 0.85, ease: 'none' }, 1.05)
+    .to('.gate-photo', { y: function(){ return -innerHeight * 0.12; }, duration: 0.85, ease: 'none' }, 1.05)
+    .to('#welcome h2, #welcome p', { y: function(){ return -innerHeight * 0.14; }, duration: 0.85, ease: 'none' }, 1.05);
   }
 
   // titoli
