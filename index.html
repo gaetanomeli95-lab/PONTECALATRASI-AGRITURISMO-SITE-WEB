@@ -247,7 +247,8 @@ html.gt .gate.open .gp{pointer-events:none}
 .feature.rev .feature-grid{grid-template-columns:50vw minmax(0,1fr)}
 .feature.rev .text{order:2}
 .feature .text{position:sticky;top:0;align-self:start;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:110px clamp(28px,5vw,96px) 70px clamp(20px,7vw,120px)}
-.feature.rev .text{padding:110px clamp(20px,7vw,120px) 70px clamp(28px,5vw,96px)}
+.feature.rev .text{padding:clamp(120px,17vh,170px) clamp(20px,7vw,120px) 70px clamp(28px,5vw,96px);justify-content:flex-start}
+.feature.rev .media{border-radius:0 28px 28px 0}
 .media{position:sticky;top:0;align-self:start;height:100vh;overflow:hidden;background:#1F2718}
 .media figure{position:absolute;inset:0;margin:0;overflow:hidden}
 .media .m1{z-index:1}.media .m2{z-index:2}
@@ -260,6 +261,8 @@ html.gt .gate.open .gp{pointer-events:none}
 @media (max-width:900px){
   .feature-grid,.feature.rev .feature-grid{display:block;min-height:0}
   .feature .text,.feature.rev .text{position:static;min-height:0;padding:clamp(100px,14vh,140px) clamp(20px,5vw,40px) 34px}
+  .feature.rev .text{padding-top:48px}
+  .feature.rev .media{border-radius:0}
   .media{position:relative;height:auto;display:grid;gap:8px;background:none}
   .media figure,.m2-in{position:relative;inset:auto;transform:none}
   .media .m1{aspect-ratio:4/5}
@@ -563,7 +566,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
   .ev-cap h3{font-size:40px}
   .ev-cap p{font-size:16.5px}
 }
-.bottega{overflow:hidden}
+.bottega{overflow:hidden;padding-bottom:clamp(60px,8vh,90px)}
 .bt-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(30px,6vw,90px);align-items:center}
 .bt-ctas{margin-top:30px}
 .bottega .btn-line{color:#2A2216;border-color:rgba(42,34,22,.45)}
