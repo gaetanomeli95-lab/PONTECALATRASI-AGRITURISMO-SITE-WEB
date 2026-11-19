@@ -466,7 +466,8 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
   .tn-card h3{font-size:22px}
   .pin-in i{width:28px;height:28px}
   .pin-in i::after{inset:6px}
-  .pin-in em{font-size:10px;padding:3px 7px;margin-bottom:5px}
+  .pin-in em{font-size:10px;padding:3px 7px;margin-bottom:5px;display:none}
+  .pin.on .pin-in em{display:block}
 }
 /* il ponte: la foto resta ferma, il racconto le scorre sopra */
 .ponte{position:relative;background:#3E4A2A;color:#F2EADB}
@@ -1007,7 +1008,7 @@ footer p{margin:0}
           <video class="tn-vid" id="tnVid" muted playsinline preload="none" poster="assets/tenuta-volo-poster.webp" aria-hidden="true"></video>
           <button type="button" class="tn-replay" id="tnReplay">Rivedi il volo</button>
           <button type="button" class="pin" data-k="casale" style="left:45%;top:52.7%" aria-label="Il casale"><span class="pin-in"><i></i><em>Casale</em></span></button>
-          <button type="button" class="pin" data-k="alloggi" style="left:6%;top:88.7%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
+          <button type="button" class="pin" data-k="alloggi" style="left:68%;top:45%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
           <button type="button" class="pin" data-k="piscina" style="left:62.5%;top:24.7%" aria-label="La piscina"><span class="pin-in"><i></i><em>Piscina</em></span></button>
           <button type="button" class="pin" data-k="ingresso" style="left:61%;top:90%" aria-label="L'ingresso"><span class="pin-in"><i></i><em>Ingresso</em></span></button>
         </div>
