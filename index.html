@@ -1006,7 +1006,7 @@ footer p{margin:0}
       <div class="tn-stage" id="tnStage">
         <div class="tn-plane" id="tnPlane">
           <img class="tn-img" src="assets/tenuta-1400.webp" srcset="assets/tenuta-900.webp 900w, assets/tenuta-1400.webp 1400w, assets/tenuta-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 60vw" width="1448" height="814" loading="lazy" decoding="async" alt="La tenuta vista dall'alto al tramonto: il casale a corte, la piscina tra le palme, le vigne e gli ulivi sulle colline">
-          <video class="tn-vid" id="tnVid" muted playsinline preload="none" poster="assets/tenuta-volo-v2.webp" aria-hidden="true"></video>
+          <video class="tn-vid" id="tnVid" muted playsinline preload="none" poster="assets/tenuta-volo-v3.webp" webkit-playsinline aria-hidden="true"></video>
           <button type="button" class="tn-replay" id="tnReplay">Rivedi il volo</button>
           <button type="button" class="pin" data-k="casale" style="left:45%;top:52.7%" aria-label="Il casale"><span class="pin-in"><i></i><em>Casale</em></span></button>
           <button type="button" class="pin" data-k="alloggi" style="left:68%;top:45%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
@@ -1515,13 +1515,14 @@ if (hasGsap && !reduce){
     if (!v || reduce || slow || !('IntersectionObserver' in window)){ if (v) v.remove(); if (rp) rp.remove(); return; }
     plane.classList.add('pre');
     var t = 0, started = false;
-    function finish(){ clearTimeout(t); plane.classList.remove('pre'); plane.classList.add('done'); }
+    v.muted = true; v.defaultMuted = true; v.playsInline = true;
+    function finish(blocked){ clearTimeout(t); plane.classList.remove('pre'); plane.classList.add('done'); rp.textContent = blocked === true ? 'Guarda il volo' : 'Rivedi il volo'; }
     function play(){
       plane.classList.remove('done'); plane.classList.add('pre');
-      if (!v.src) v.src = innerWidth < 701 ? 'assets/tenuta-volo-v2-854.mp4' : 'assets/tenuta-volo-v2.mp4';
-      try { v.currentTime = 0; } catch (e) {}
-      var pr = v.play(); if (pr && pr.catch) pr.catch(finish);
-      clearTimeout(t); t = setTimeout(finish, 9000);
+      if (!v.getAttribute('src')){ v.src = innerWidth < 701 ? 'assets/tenuta-volo-v3-854.mp4' : 'assets/tenuta-volo-v3.mp4'; v.load(); }
+      else { try { v.currentTime = 0; } catch (e) {} }
+      var pr = v.play(); if (pr && pr.catch) pr.catch(function(){ finish(true); });
+      clearTimeout(t); t = setTimeout(finish, 12000);
     }
     v.addEventListener('ended', finish);
     v.addEventListener('error', finish);
@@ -1529,9 +1530,9 @@ if (hasGsap && !reduce){
     rp.addEventListener('click', play);
     new IntersectionObserver(function(es){ es.forEach(function(e){
       if (plane.classList.contains('done')) return;
-      if (e.intersectionRatio >= 0.8){ if (!started){ started = true; play(); } else { try { v.play(); } catch (x) {} } }
-      else if (started && e.intersectionRatio < 0.3){ try { v.pause(); v.currentTime = 0; } catch (x) {} started = false; clearTimeout(t); }
-    }); }, { threshold: [0, 0.3, 0.8, 1] }).observe(plane);
+      if (e.intersectionRatio >= 0.6){ if (!started){ started = true; play(); } else { try { v.play(); } catch (x) {} } }
+      else if (started && e.intersectionRatio < 0.3){ try { v.pause(); } catch (x) {} started = false; clearTimeout(t); }
+    }); }, { threshold: [0, 0.3, 0.6, 1] }).observe(plane);
   })();
 })();
 
