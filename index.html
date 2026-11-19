@@ -424,12 +424,11 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 .tn-list button:hover{transform:translateX(4px);border-color:rgba(176,138,74,.7)}
 .tn-list button.on{background:#2F3A22;color:#F4ECDD;border-color:#2F3A22}
 .tn-list button.on i{background:#E9C783;color:#1C150A}
-.tn-stage{position:relative;perspective:1500px;perspective-origin:50% 20%;padding:10px 0 150px}
-.tn-plane{position:relative;aspect-ratio:10/7;transform-style:preserve-3d;transform:rotateX(var(--rx,40deg)) rotateZ(var(--rz,-9deg));transition:transform 1.1s cubic-bezier(.2,.7,.2,1);will-change:transform;border-radius:14px}
-.tn-plane::after{content:"";position:absolute;left:0;right:0;top:100%;height:22px;background:linear-gradient(180deg,#8A6A3E,#5E4526);transform-origin:top;transform:rotateX(-90deg);border-radius:0 0 6px 6px}
-.tn-img{position:relative;display:block;width:100%;height:100%;border-radius:14px;box-shadow:0 0 0 1px rgba(120,90,40,.35),0 30px 50px rgba(40,28,12,.32)}
-.pin{position:absolute;z-index:2;width:0;height:0;padding:0;border:0;background:none;cursor:pointer;transform-style:preserve-3d}
-.pin-in{position:absolute;left:0;bottom:0;display:flex;flex-direction:column;align-items:center;transform-origin:50% 100%;transform:translateX(-50%) rotateZ(calc(-1 * var(--rz,-9deg))) rotateX(calc(-1 * var(--rx,40deg)));transition:transform 1.1s cubic-bezier(.2,.7,.2,1)}
+.tn-stage{position:relative;padding:0 0 120px}
+.tn-plane{position:relative;aspect-ratio:4/3;border-radius:18px;--rx:0deg;--rz:0deg}
+.tn-img{position:relative;display:block;width:100%;height:100%;object-fit:cover;border-radius:18px;box-shadow:0 30px 70px rgba(40,28,12,.35)}
+.pin{position:absolute;z-index:2;width:0;height:0;padding:0;border:0;background:none;cursor:pointer}
+.pin-in{position:absolute;left:0;bottom:0;display:flex;flex-direction:column;align-items:center;transform:translateX(-50%)}
 .pin-in i{display:grid;place-items:center;width:34px;height:34px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#2F3A22;border:2px solid #E9C783;box-shadow:0 8px 18px rgba(0,0,0,.35);transition:background .25s,transform .25s}
 .pin-in i::before{content:attr(data-n)}
 .pin-in i{font-style:normal;font-family:var(--font-body);font-size:0}
@@ -451,10 +450,8 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 @media (max-width:900px){
   .tn-grid{grid-template-columns:minmax(0,1fr)}
   .tn-list{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .tn-list li:last-child{grid-column:1/-1}
   .tn-list button{font-size:18px;padding:10px 12px}
-  .tn-stage{padding:0;--rx:28deg;--rz:-6deg;perspective:1100px;margin-top:6px}
-  .tn-plane{--rx:28deg;--rz:-6deg}
+  .tn-stage{padding:0;margin-top:6px}
   .tn-card{position:relative;left:auto;bottom:auto;width:100%;margin-top:34px;grid-template-columns:96px minmax(0,1fr)}
   .tn-card img{width:96px;height:96px}
   .tn-card h3{font-size:22px}
@@ -987,23 +984,21 @@ footer p{margin:0}
       <div class="tn-text">
         <p class="eyebrow"><b>17:30</b> La tenuta</p>
         <h2 class="split-line">Tutto <em>a due passi</em></h2>
-        <p class="lead">Il casale con il cortile, le camere, la piscina e la fattoria con la stalla e il caseificio: è tutto dentro la stessa tenuta, tra le vigne e gli ulivi. Tocca un punto sulla mappa.</p>
+        <p class="lead">Il casale con il cortile, le camere, la piscina e la fattoria con la stalla e il caseificio: è tutto dentro la stessa tenuta, tra le vigne e gli ulivi. Tocca un punto sulla foto.</p>
         <ol class="tn-list" id="tnList">
           <li><button type="button" data-k="casale"><i>1</i>Il casale</button></li>
           <li><button type="button" data-k="alloggi"><i>2</i>Le camere</button></li>
           <li><button type="button" data-k="piscina"><i>3</i>La piscina</button></li>
-          <li><button type="button" data-k="fattoria"><i>4</i>La fattoria</button></li>
-          <li><button type="button" data-k="ingresso"><i>5</i>L'ingresso</button></li>
+          <li><button type="button" data-k="ingresso"><i>4</i>L'ingresso</button></li>
         </ol>
       </div>
       <div class="tn-stage" id="tnStage">
         <div class="tn-plane" id="tnPlane">
-          <img class="tn-img" src="assets/mappa.svg" width="1000" height="700" loading="lazy" decoding="async" alt="Mappa illustrata della tenuta: il casale a corte, le camere, la piscina, la fattoria e l'ingresso, tra vigne e ulivi">
-          <button type="button" class="pin" data-k="casale" style="left:65%;top:67%" aria-label="Il casale"><span class="pin-in"><i>1</i><em>Casale</em></span></button>
-          <button type="button" class="pin" data-k="alloggi" style="left:49%;top:55%" aria-label="Le camere"><span class="pin-in"><i>2</i><em>Camere</em></span></button>
-          <button type="button" class="pin" data-k="piscina" style="left:93%;top:69%" aria-label="La piscina"><span class="pin-in"><i>3</i><em>Piscina</em></span></button>
-          <button type="button" class="pin" data-k="fattoria" style="left:26%;top:22%" aria-label="La fattoria"><span class="pin-in"><i>4</i><em>Fattoria</em></span></button>
-          <button type="button" class="pin" data-k="ingresso" style="left:57.5%;top:86%" aria-label="L'ingresso"><span class="pin-in"><i>5</i><em>Ingresso</em></span></button>
+          <img class="tn-img" src="assets/tenuta-1400.webp" srcset="assets/tenuta-900.webp 900w, assets/tenuta-1400.webp 1400w, assets/tenuta-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 60vw" width="1448" height="1086" loading="lazy" decoding="async" alt="La tenuta vista dall'alto al tramonto: il casale a corte, la piscina tra le palme, le vigne e gli ulivi sulle colline">
+          <button type="button" class="pin" data-k="casale" style="left:45%;top:52%" aria-label="Il casale"><span class="pin-in"><i></i><em>Casale</em></span></button>
+          <button type="button" class="pin" data-k="alloggi" style="left:6%;top:79%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
+          <button type="button" class="pin" data-k="piscina" style="left:62.5%;top:31%" aria-label="La piscina"><span class="pin-in"><i></i><em>Piscina</em></span></button>
+          <button type="button" class="pin" data-k="ingresso" style="left:61%;top:80%" aria-label="L'ingresso"><span class="pin-in"><i></i><em>Ingresso</em></span></button>
         </div>
         <article class="tn-card" id="tnCard" aria-live="polite">
           <img id="tnImg" src="assets/baglio-640.webp" alt="" width="640" height="853" loading="lazy" decoding="async">
@@ -1471,7 +1466,7 @@ if (hasGsap && !reduce){
 
 
 
-/* ---------- la tenuta: mappa in prospettiva, come un plastico ---------- */
+/* ---------- la tenuta vista dall'alto ---------- */
 (function(){
   var stage = document.getElementById('tnStage'); if (!stage) return;
   var plane = document.getElementById('tnPlane'), card = document.getElementById('tnCard');
@@ -1479,7 +1474,6 @@ if (hasGsap && !reduce){
     casale: { t: 'Il casale', x: "Il baglio del XII secolo intorno al grande cortile: le due sale in pietra del ristorante e la cappella.", img: 'assets/baglio-640.webp', a: '#masseria', l: 'Scopri la masseria' },
     alloggi: { t: 'Le camere', x: "Otto camere in stile rustico per 22 posti letto, a pochi passi dal ristorante. La colazione è compresa.", img: 'assets/camera-640.webp', a: '#camere', l: 'Vedi le camere' },
     piscina: { t: 'La piscina', x: "La piscina panoramica in mezzo al verde, anche per una cena al tramonto durante le feste.", img: 'assets/piscina-eventi-768.webp', a: '#eventi', l: 'Feste ed eventi' },
-    fattoria: { t: 'La fattoria', x: "La stalla, il caseificio e i campi: da qui arrivano il latte, la ricotta e i formaggi della nostra cucina.", img: 'assets/campagna-768.webp', a: '#terra', l: 'La nostra terra' },
     ingresso: { t: "L'ingresso", x: "Si entra dal portone ad arco, sulla SS 624 Palermo-Sciacca, uscita al km 43+800.", img: 'assets/portone-768.webp', a: '#contatti', l: 'Come arrivare' }
   };
   var pins = [].slice.call(stage.querySelectorAll('.pin')), btns = [].slice.call(document.querySelectorAll('#tnList button'));
@@ -1497,14 +1491,6 @@ if (hasGsap && !reduce){
     if (lenis) lenis.scrollTo(t, { duration: 1.6 }); else t.scrollIntoView({ behavior: 'smooth' });
   });
   show('casale', true);
-  // col mouse il plastico si inclina un poco
-  if (reduce || isTouch) return;
-  var raf = 0, nx = 0, ny = 0;
-  stage.addEventListener('mousemove', function(e){
-    var r = stage.getBoundingClientRect(); nx = (e.clientX - r.left) / r.width - 0.5; ny = (e.clientY - r.top) / r.height - 0.5;
-    if (!raf) raf = requestAnimationFrame(function(){ raf = 0; plane.style.setProperty('--rx', (40 - ny * 10).toFixed(2) + 'deg'); plane.style.setProperty('--rz', (-9 + nx * 10).toFixed(2) + 'deg'); });
-  });
-  stage.addEventListener('mouseleave', function(){ plane.style.removeProperty('--rx'); plane.style.removeProperty('--rz'); });
 })();
 
 /* ---------- popup della terra ---------- */
