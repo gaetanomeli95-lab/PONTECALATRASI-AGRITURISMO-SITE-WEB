@@ -449,7 +449,7 @@ html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:op
 .pin:hover .pin-in i{transform:rotate(-45deg) scale(1.12)}
 .pin.on .pin-in em{background:#2F3A22;color:#F3D79A}
 .tn-card{position:relative;margin:18px 0 0 3%;z-index:5;display:grid;grid-template-columns:120px minmax(0,1fr);gap:16px;width:min(470px,92%);padding:14px;border-radius:16px;background:#FBF6EC;color:#2A2216;box-shadow:0 24px 60px rgba(40,28,12,.3);outline:1px solid rgba(176,138,74,.45);outline-offset:-7px}
-.tn-card img{width:120px;height:120px;object-fit:cover;border-radius:10px}
+.tn-card img{width:120px;height:120px;object-fit:cover;border-radius:10px;transition:opacity .25s}
 .tn-card h3{margin:4px 0 6px;font-size:26px;line-height:1.1}
 .tn-card p{margin:0;font-family:var(--font-text);font-size:16.5px;line-height:1.45;color:#5A5343}
 .tn-card a{display:inline-block;margin-top:8px;font-size:14px;font-weight:700;color:#8A6220;text-decoration:none}
@@ -1005,7 +1005,7 @@ footer p{margin:0}
       <div class="tn-stage" id="tnStage">
         <div class="tn-plane" id="tnPlane">
           <img class="tn-img" src="assets/tenuta-1400.webp" srcset="assets/tenuta-900.webp 900w, assets/tenuta-1400.webp 1400w, assets/tenuta-2000.webp 2000w" sizes="(max-width: 900px) 100vw, 60vw" width="1448" height="814" loading="lazy" decoding="async" alt="La tenuta vista dall'alto al tramonto: il casale a corte, la piscina tra le palme, le vigne e gli ulivi sulle colline">
-          <video class="tn-vid" id="tnVid" muted playsinline preload="none" poster="assets/tenuta-volo-poster.webp" aria-hidden="true"></video>
+          <video class="tn-vid" id="tnVid" muted playsinline preload="none" poster="assets/tenuta-volo-v2.webp" aria-hidden="true"></video>
           <button type="button" class="tn-replay" id="tnReplay">Rivedi il volo</button>
           <button type="button" class="pin" data-k="casale" style="left:45%;top:52.7%" aria-label="Il casale"><span class="pin-in"><i></i><em>Casale</em></span></button>
           <button type="button" class="pin" data-k="alloggi" style="left:68%;top:45%" aria-label="Le camere"><span class="pin-in"><i></i><em>Camere</em></span></button>
@@ -1492,7 +1492,9 @@ if (hasGsap && !reduce){
   function show(k, first){
     var d = D[k]; if (!d) return;
     pins.concat(btns).forEach(function(b){ b.classList.toggle('on', b.dataset.k === k); });
-    document.getElementById('tnImg').src = d.img; document.getElementById('tnImg').alt = d.t;
+    var im = document.getElementById('tnImg');
+    if (im.getAttribute('src') !== d.img){ im.style.opacity = '0'; im.onload = function(){ im.style.opacity = '1'; }; im.src = d.img; }
+    im.alt = d.t;
     document.getElementById('tnTitle').textContent = d.t; document.getElementById('tnText').textContent = d.x;
     var ln = document.getElementById('tnLink'); ln.href = d.a; ln.textContent = d.l + ' →';
     if (!first){ card.classList.remove('swap'); void card.offsetWidth; card.classList.add('swap'); }
@@ -1503,6 +1505,8 @@ if (hasGsap && !reduce){
     if (lenis) lenis.scrollTo(t, { duration: 1.6 }); else t.scrollIntoView({ behavior: 'smooth' });
   });
   show('casale', true);
+  // le foto delle schede si caricano prima, così il cambio è immediato
+  new IntersectionObserver(function(es, o){ if (es[0].isIntersecting){ o.disconnect(); Object.keys(D).forEach(function(k){ var i = new Image(); i.src = D[k].img; }); } }, { rootMargin: '600px' }).observe(stage);
   // il volo del drone: si allontana dal cortile fino alla vista intera, poi compaiono i punti
   (function(){
     var v = document.getElementById('tnVid'), rp = document.getElementById('tnReplay');
@@ -1513,7 +1517,7 @@ if (hasGsap && !reduce){
     function finish(){ clearTimeout(t); plane.classList.remove('pre'); plane.classList.add('done'); }
     function play(){
       plane.classList.remove('done'); plane.classList.add('pre');
-      if (!v.src) v.src = innerWidth < 701 ? 'assets/tenuta-volo-854.mp4' : 'assets/tenuta-volo.mp4';
+      if (!v.src) v.src = innerWidth < 701 ? 'assets/tenuta-volo-v2-854.mp4' : 'assets/tenuta-volo-v2.mp4';
       try { v.currentTime = 0; } catch (e) {}
       var pr = v.play(); if (pr && pr.catch) pr.catch(finish);
       clearTimeout(t); t = setTimeout(finish, 9000);
@@ -1522,7 +1526,11 @@ if (hasGsap && !reduce){
     v.addEventListener('error', finish);
     pins.concat(btns).forEach(function(b){ b.addEventListener('click', function(){ if (plane.classList.contains('pre')){ try { v.pause(); } catch (e) {} finish(); } }); });
     rp.addEventListener('click', play);
-    new IntersectionObserver(function(es, o){ es.forEach(function(e){ if (e.isIntersecting && !started){ started = true; o.disconnect(); play(); } }); }, { threshold: 0.55 }).observe(plane);
+    new IntersectionObserver(function(es){ es.forEach(function(e){
+      if (plane.classList.contains('done')) return;
+      if (e.intersectionRatio >= 0.8){ if (!started){ started = true; play(); } else { try { v.play(); } catch (x) {} } }
+      else if (started && e.intersectionRatio < 0.3){ try { v.pause(); v.currentTime = 0; } catch (x) {} started = false; clearTimeout(t); }
+    }); }, { threshold: [0, 0.3, 0.8, 1] }).observe(plane);
   })();
 })();
 
