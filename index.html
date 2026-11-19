@@ -93,7 +93,7 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 .menu-toggle{display:none;background:none;border:1px solid currentColor;color:var(--fg);border-radius:999px;min-height:44px;padding:0 16px;font:600 14px var(--font-body);letter-spacing:.08em;text-transform:uppercase}
 
 /* 1. il portone */
-.gate-wrap{position:relative;height:270vh;view-timeline:--gate block}
+.gate-wrap{position:relative;height:225vh;view-timeline:--gate block}
 .gate{position:sticky;top:0;height:100vh;min-height:620px;overflow:hidden;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='44'%3E%3Cpath d='M0 .5H120M0 22.5H120M.5 0V22M60.5 22V44' fill='none' stroke='rgba(233,199,131,.07)'/%3E%3C/svg%3E"),radial-gradient(ellipse 80% 75% at 62% 45%,#34402A,#1F2718)}
 .gate-photo{position:absolute;inset:0}
 .gate-photo img{width:100%;height:100%;object-fit:cover;object-position:50% 45%;transform-origin:50% 50%}
@@ -237,9 +237,9 @@ h2 em,h1 em{font-style:italic;color:var(--accent)}
 
 @media (hover:none),(pointer:coarse){.gate-wrap{height:215vh}}
 /* telefono: il portone si apre a tempo, appena si inizia a scorrere (animazione del browser, non legata al dito) */
-html.gt .gate-wrap{height:165vh;view-timeline:none}
-html.gt #wallP .wp{transition:transform 1.15s cubic-bezier(.65,0,.35,1);will-change:transform}
-html.gt #gateImg{transform:translate3d(var(--gx,0px),var(--gy,0px),0) scale(1.18);transition:transform 1.5s cubic-bezier(.55,0,.25,1)}
+html.gt .gate-wrap{height:118vh;view-timeline:none}
+html.gt #wallP .wp{transition:transform 1s cubic-bezier(.65,0,.35,1);will-change:transform}
+html.gt #gateImg{transform:translate3d(var(--gx,0px),var(--gy,0px),0) scale(1.18);transition:transform 1.25s cubic-bezier(.55,0,.25,1)}
 html.gt .gate-intro{transition:opacity .45s ease,transform .6s ease;will-change:opacity,transform}
 html.gt #wall,html.gt #dust{transition:opacity .5s ease}
 html.gt #gateFade,html.gt #welcome{transition:opacity .45s ease;will-change:opacity}
@@ -251,17 +251,17 @@ html.gt .gate.open #gateImg{transform:translate3d(0,0,0) scale(1)}
 html.gt .gate.open .gate-intro{opacity:0;transform:translate3d(0,-40px,0);pointer-events:none}
 html.gt .gate.open .gate-intro .txt{pointer-events:none}
 html.gt .gate.open #wall,html.gt .gate.open #dust{opacity:0}
-html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:opacity .8s ease .95s}
+html.gt .gate.open #gateFade,html.gt .gate.open #welcome{opacity:1;transition:opacity .6s ease .55s}
 /* il browser anima il portone da solo, fuori dal lavoro della pagina */
 @supports (animation-timeline: view()){
-  html.sda #wallP .wp{animation-timing-function:cubic-bezier(.45,0,.55,1);animation-fill-mode:both;animation-timeline:--gate;animation-range:contain 4% contain 66%}
+  html.sda #wallP .wp{animation-timing-function:cubic-bezier(.45,0,.55,1);animation-fill-mode:both;animation-timeline:--gate;animation-range:contain 3% contain 72%}
   html.sda #wallP .wp-l{animation-name:gwl}html.sda #wallP .wp-r{animation-name:gwr}html.sda #wallP .wp-t{animation-name:gwt}html.sda #wallP .wp-b{animation-name:gwb}
-  html.sda #gateImg{animation:gimg linear both;animation-timeline:--gate;animation-range:contain 0% contain 70%}
-  html.sda .gate-intro{animation:gout linear both;animation-timeline:--gate;animation-range:contain 0% contain 18%}
-  html.sda #wall{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 3% contain 24%}
-  html.sda #dust{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 0% contain 22%}
-  html.sda #gateFade{animation:gin linear both;animation-timeline:--gate;animation-range:contain 50% contain 70%}
-  html.sda #welcome{animation:gin linear both;animation-timeline:--gate;animation-range:contain 54% contain 72%}
+  html.sda #gateImg{animation:gimg linear both;animation-timeline:--gate;animation-range:contain 0% contain 78%}
+  html.sda .gate-intro{animation:gout linear both;animation-timeline:--gate;animation-range:contain 0% contain 20%}
+  html.sda #wall{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 3% contain 26%}
+  html.sda #dust{animation:gfade linear both;animation-timeline:--gate;animation-range:contain 0% contain 24%}
+  html.sda #gateFade{animation:gin linear both;animation-timeline:--gate;animation-range:contain 58% contain 84%}
+  html.sda #welcome{animation:gin linear both;animation-timeline:--gate;animation-range:contain 62% contain 86%}
 }
 @keyframes gwl{to{transform:translate3d(-101%,0,0)}}
 @keyframes gwr{to{transform:translate3d(101%,0,0)}}
